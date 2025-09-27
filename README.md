@@ -1,89 +1,135 @@
-![Astro Sphere Lighthouse Score](_astrosphere.jpg)
+# Gemini Stiftung Website
 
-Astro Sphere is a static, minimalist, lightweight, lightning fast portfolio and blog theme based on my personal website.
+Die offizielle Website der Gemini-Stiftung für Forschung digitaler Zwillinge und Blockchain-basierte Bindungstechnologien.
 
-It is primarily Astro, Tailwind and Typescript, with a very small amount of SolidJS for stateful components.
+## Über die Stiftung
 
-## 🚀 Deploy your own
+Die Gemini-Stiftung ist eine **gemeinnützige Forschungsstiftung**, die sich der Erforschung und Entwicklung von offenen Konzepten für digitale Eigentums- und Identitätssysteme widmet. Im Zentrum unserer Arbeit steht die Blockchain-Technologie als Trägerin verlässlicher digitaler Zustände.
 
-[![Deploy with Vercel](_deploy_vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/markhorn-dev/astro-sphere)  [![Deploy with Netlify](_deploy_netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/markhorn-dev/astro-sphere)
+### Forschungsschwerpunkte
 
-## 📋 Features
+- **Digital verschränkte Vermögenswerte** - Asset Interlinking und Eigentumsmodelle
+- **Offene Identitätsnachweise** - Selbstbestimmte Identität und Nachweisketten
+- **Trustless Systems** - Vertrauen durch mathematische Gewissheit statt Autorität
 
-- ✅ 100/100 Lighthouse performance
-- ✅ Responsive
-- ✅ Accessible
-- ✅ SEO-friendly
-- ✅ Typesafe
-- ✅ Minimal style
-- ✅ Light/Dark Theme
-- ✅ Animated UI
-- ✅ Tailwind styling
-- ✅ Auto generated sitemap
-- ✅ Auto generated RSS Feed
-- ✅ Markdown support
-- ✅ MDX Support (components in your markdown)
-- ✅ Searchable content (posts and projects)
-- ✅ Code Blocks - copy to clipboard
+## Technische Details
 
-## 💯 Lighthouse score
-![Astro Sphere Lighthouse Score](_lighthouse.png)
+### Framework & Build System
 
-## 🕊️ Lightweight
-All pages under 100kb (including fonts)
+- **Framework:** Astro v4.16.18 mit Astro Sphere Template
+- **Package Manager:** bun
+- **Styling:** Tailwind CSS mit IBM Plex Typography
+- **Interaktivität:** SolidJS Components
+- **Build Target:** Static Site Generation (SSG)
 
-## ⚡︎ Fast
-Rendered in ~40ms on localhost
+### Entwicklung
 
-## 📄 Configuration
+```bash
+# Abhängigkeiten installieren
+bun install
 
-The blog posts on the demo serve as the documentation and configuration.
+# Entwicklungsserver starten
+bun run dev
 
-## 💻 Commands
+# Entwicklungsserver mit Netzwerkzugang
+bun run dev:network
 
-All commands are run from the root of the project, from a terminal:
+# Produktions-Build
+bun run build
 
-Replace npm with your package manager of choice. `npm`, `pnpm`, `yarn`, `bun`, etc
+# Produktions-Preview
+bun run preview
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run dev:network`     | Starts dev server on local network               |
-| `npm run sync`            | Generates TypeScript types for all Astro modules.|
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run preview:network` | Starts preview server on local network           |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run lint`            | Run ESLint                                       |
-| `npm run lint:fix`        | Auto-fix ESLint issues                           |
+# Linting
+bun run lint
+bun run lint:fix
+```
 
-## 🗺️ Roadmap
+### Theme System
 
-A few features I plan to implement
-- ⬜ Article Pages - Table of Contents
-- ⬜ Article Pages - Share on social media
+Die Website verwendet ein **Light-Only Theme System**:
 
-## ✨ Acknowledgement
+- **Primärfarbe:** Deutsche Bank Blau (#001f3f)
+- **Akzentfarbe:** Premium Gold (#d4af37)
+- **Typografie:** IBM Plex Serif (institutional), IBM Plex Sans (technical), IBM Plex Mono (code)
+- **Layout:** Clean, minimal, research-focused
 
-Theme inspired by [Paco Coursey](https://paco.me/), [Lee Robinson](https://leerob.io/) and [Hayden Bleasel](https://www.haydenbleasel.com/)
+### Architektur
 
+```
+src/
+├── components/          # Wiederverwendbare UI-Komponenten
+├── content/
+│   ├── blog/           # Publikationen (Markdown)
+│   ├── projects/       # Forschungsprojekte (Markdown)
+│   └── work/           # Forschungsarbeiten (Markdown)
+├── layouts/            # Seitenlayouts
+├── pages/              # Astro-Seiten
+└── styles/             # Globale Styles
+```
 
-## 🏛️ License
+### Content Management
 
-MIT
+- **Blog Posts:** Markdown-Dateien in `src/content/blog/`
+- **Projekte:** Markdown-Dateien in `src/content/projects/`
+- **Forschungsarbeiten:** Markdown-Dateien in `src/content/work/`
 
+Alle Inhalte werden über Astro Content Collections verwaltet und automatisch typisiert.
 
-# 1.0.1 Update
+### Deployment
 
-Added ability to run dev and preview on local network.
-added npm run dev:network
-added npm run preview:network
+Die Website wird als statische Seiten generiert (`format: "directory"`):
 
-Added slightly more particle density in both light and dark mode.
+- **URL-Struktur:** `/blog/artikel-name/` (ohne .html)
+- **nginx-kompatibel:** Standard-Webserver-Konfiguration
+- **SEO-optimiert:** Clean URLs, Sitemap, RSS Feed
 
-Added subtle dark mode star and meteor animations.
+### Performance
 
-Removed eslint config
+- **Bundle-Splitting:** Automatische Code-Splits
+- **Image-Optimierung:** Astro Asset Pipeline
+- **CSS-Purging:** Unused Tailwind Classes entfernt
+- **Lighthouse-Target:** 95+ in allen Kategorien
 
+## Philosophie
+
+> "Digitale Infrastrukturen für Eigentum und Identität sind Forschungs- und Gestaltungsaufgaben für die Gesellschaft – nicht für Konzerne allein."
+
+### Leitprinzipien
+
+- **Open Source = Öffentliche Teilhabe**
+- **"People's Money, People's Code"** - Öffentlich finanzierte Forschung muss öffentlich zugänglich sein
+- **"Not open, not trust"** - Vertrauen entsteht nur durch Transparenz
+- **Krypto als Gemeingut** - Kryptografische Grundlagen sind digitale Infrastruktur
+
+## Entwicklung & Beiträge
+
+### Code-Konventionen
+
+- **TypeScript** für alle Logic-Components
+- **Tailwind CSS** für Styling (keine Custom CSS außer global.css)
+- **Semantic HTML** für Accessibility
+- **Light Theme Only** - Konsistentes, institutionelles Design
+
+### Content-Richtlinien
+
+- **Wissenschaftlicher Ton** - Präzise, sachlich, fundiert
+- **Gemeinnütziger Fokus** - Keine kommerzielle Sprache
+- **Open Source Mindset** - Transparenz und Nachvollziehbarkeit
+- **Deutsche Sprache** - Zielgruppe: Deutsche Forschungslandschaft
+
+## Browser Support
+
+- Chrome: 90+
+- Firefox: 88+
+- Safari: 14+
+- Edge: 90+
+
+## Lizenz
+
+Diese Website und ihre Inhalte stehen unter einer offenen Lizenz. Forschungsergebnisse sind öffentlich zugänglich und überprüfbar.
+
+---
+
+**Gemini-Stiftung**
+Gemeinnützige Forschung für ein digitales Gemeinwesen, das allen gehört.
