@@ -276,30 +276,9 @@ declare module 'astro:content' {
 } & { render(): Render[".md"] };
 };
 "work": {
-"apple.md": {
-	id: "apple.md";
-  slug: "apple";
-  body: string;
-  collection: "work";
-  data: InferEntrySchema<"work">
-} & { render(): Render[".md"] };
-"facebook.md": {
-	id: "facebook.md";
-  slug: "facebook";
-  body: string;
-  collection: "work";
-  data: InferEntrySchema<"work">
-} & { render(): Render[".md"] };
-"google.md": {
-	id: "google.md";
-  slug: "google";
-  body: string;
-  collection: "work";
-  data: InferEntrySchema<"work">
-} & { render(): Render[".md"] };
-"mcdonalds.md": {
-	id: "mcdonalds.md";
-  slug: "mcdonalds";
+"snft-forschungsprojekt.md": {
+	id: "snft-forschungsprojekt.md";
+  slug: "snft-forschungsprojekt";
   body: string;
   collection: "work";
   data: InferEntrySchema<"work">
