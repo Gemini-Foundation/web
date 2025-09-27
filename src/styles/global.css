@@ -68,7 +68,11 @@ header.scrolled {
 }
 
 article {
-  @apply prose dark:prose-invert max-w-full pb-12;
+  @apply prose max-w-full pb-12;
+}
+
+article strong {
+  @apply text-black;
 }
 
 .page-heading {

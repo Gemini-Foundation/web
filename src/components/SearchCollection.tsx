@@ -100,6 +100,7 @@ export default function SearchCollection({ entry_name, data, tags }: Props) {
                       "bg-black/5",
                       "hover:bg-black/10",
                       "transition-colors duration-300 ease-in-out",
+                      "text-gray-600",
                       filter().has(tag) && "text-black"
                     )}
                   >
