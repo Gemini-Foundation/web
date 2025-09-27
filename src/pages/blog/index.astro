@@ -1,0 +1,130 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import SearchCollection from "@components/SearchCollection";
+import { BLOG } from "@consts";
+
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
+  (a, b) => a.localeCompare(b),
+);
+
+const estimated_initial_size =
+  28 + posts.length * 158 + (posts.length - 1) * 12;
+---
+
+<PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION} theme="light">
+  <div class="bg-light-bg-primary min-h-screen font-serif">
+    <!-- Hero Section -->
+    <section class="relative py-24 px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-light-primary mb-6">
+          Publikationen
+        </h1>
+        <p class="text-xl text-light-text-secondary max-w-3xl mx-auto">
+          Wissenschaftliche Artikel und Forschungsergebnisse zu digitalen Zwillingen und Blockchain-Technologie.
+        </p>
+      </div>
+    </section>
+
+    <!-- Research Publication Info -->
+    <section class="py-16 px-8 bg-light-bg-secondary">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-light-primary mb-6">
+            Open Access Forschung
+          </h2>
+          <p class="text-light-text-secondary max-w-4xl mx-auto text-lg">
+            Unsere Blockchain-Forschung richtet sich <strong>nicht auf Spekulation oder Tokenhandel</strong>, 
+            sondern auf <strong>strukturierte Vertrauensbeziehungen</strong> in offenen Systemen. 
+            Wir betrachten Blockchain als <strong>technische Basis für digitale Grundrechte</strong>, nicht als Ware.
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-light-bg-primary p-6 rounded-lg border border-light-border text-center">
+            <div class="w-12 h-12 bg-light-secondary rounded-lg flex items-center justify-center mb-4 mx-auto">
+              <span class="text-white text-xl font-bold">📄</span>
+            </div>
+            <h3 class="text-lg font-semibold text-light-primary mb-2">Open Access</h3>
+            <p class="text-sm text-light-text-secondary">Alle Forschungsergebnisse sind frei zugänglich und wissenschaftlich dokumentiert</p>
+          </div>
+          
+          <div class="bg-light-bg-primary p-6 rounded-lg border border-light-border text-center">
+            <div class="w-12 h-12 bg-light-secondary rounded-lg flex items-center justify-center mb-4 mx-auto">
+              <span class="text-white text-xl font-bold">⚗️</span>
+            </div>
+            <h3 class="text-lg font-semibold text-light-primary mb-2">Peer Review</h3>
+            <p class="text-sm text-light-text-secondary">Wissenschaftliche Qualitätssicherung durch fachliche Begutachtung</p>
+          </div>
+          
+          <div class="bg-light-bg-primary p-6 rounded-lg border border-light-border text-center">
+            <div class="w-12 h-12 bg-light-secondary rounded-lg flex items-center justify-center mb-4 mx-auto">
+              <span class="text-white text-xl font-bold">🌐</span>
+            </div>
+            <h3 class="text-lg font-semibold text-light-primary mb-2">Allgemeinwohl</h3>
+            <p class="text-sm text-light-text-secondary">Forschung dient ausschließlich gemeinnützigen Zwecken</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="py-16 px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-light-primary text-center mb-12">
+          Wissenschaftliche und Presse Publikationen
+        </h2>
+        {posts.length > 0 ? (
+          <div
+            id="search-collection-wrapper"
+            class="animate"
+            style={{ minHeight: `${estimated_initial_size}px` }}
+          >
+            <SearchCollection
+              client:load
+              entry_name={"posts"}
+              tags={tags}
+              data={posts}
+            />
+          </div>
+        ) : (
+          <div class="bg-light-bg-secondary p-8 rounded-lg border border-light-border text-center">
+            <h3 class="text-xl font-semibold text-light-primary mb-4">
+              Publikationen in Vorbereitung
+            </h3>
+            <p class="text-light-text-secondary mb-6">
+              Unsere Forschungsarbeiten befinden sich derzeit in der Aufbauphase. 
+              Erste wissenschaftliche Publikationen sind für die kommenden Monate geplant.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 text-left">
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Blockchain-basierte Bindungstechnologien</h4>
+                <p class="text-sm text-light-text-secondary">Grundlagen und Methodik der Verknüpfung realer und digitaler Entitäten</p>
+                <div class="text-xs text-light-text-muted mt-2">Status: In Vorbereitung</div>
+              </div>
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Digitale Zwillinge im Rechtssystem</h4>
+                <p class="text-sm text-light-text-secondary">Rechtliche Herausforderungen und Lösungsansätze für digitale Repräsentationen</p>
+                <div class="text-xs text-light-text-muted mt-2">Status: Konzeption</div>
+              </div>
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Self-Sovereign Identity in der Praxis</h4>
+                <p class="text-sm text-light-text-secondary">Implementierung dezentraler Identitätslösungen nach EU-Standards</p>
+                <div class="text-xs text-light-text-muted mt-2">Status: Forschungsphase</div>
+              </div>
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Vertrauensbeziehungen in offenen Systemen</h4>
+                <p class="text-sm text-light-text-secondary">Analyse von Vertrauensmechanismen in dezentralen Netzwerken</p>
+                <div class="text-xs text-light-text-muted mt-2">Status: Literaturreview</div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  </div>
+</PageLayout>

@@ -1,0 +1,210 @@
+---
+import PageLayout from "@layouts/PageLayout.astro"
+---
+
+<PageLayout title="Dark Theme Demo" description="Demonstration des neuen Dark Themes" theme="dark">
+  <div class="bg-dark-bg-primary min-h-screen font-sans">
+    <!-- Hero Section - Dark Theme -->
+    <section class="relative py-24 px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-dark-primary mb-6">
+          Digital Matrix
+        </h1>
+        <p class="text-xl text-dark-text-secondary max-w-3xl mx-auto">
+          Technische Implementierungsebene mit modernem Tech-Design für Blockchain-basierte Bindungstechnologien.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4 justify-center">
+          <a href="#" class="py-3 px-6 rounded-lg text-sm md:text-base bg-dark-primary text-dark-bg-primary hover:bg-dark-primary/90 transition-colors font-medium">
+            Tech Prototypen
+          </a>
+          <a href="#" class="py-3 px-6 rounded-lg text-sm md:text-base border-2 border-dark-secondary text-dark-secondary hover:bg-dark-secondary hover:text-dark-bg-primary transition-colors font-medium">
+            Code Beispiele
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Features Section -->
+    <section class="py-16 px-8 bg-dark-bg-secondary">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-dark-primary mb-6">
+            Technische Innovation
+          </h2>
+          <p class="text-dark-text-secondary max-w-4xl mx-auto text-lg">
+            Unsere <strong>Dark Theme</strong> repräsentiert die technische, digitale Welt der 
+            <strong>Blockchain-Entwicklung</strong> und <strong>Code-Implementierung</strong>.
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-dark-bg-accent p-6 rounded-lg border border-dark-border text-center hover:shadow-lg hover:shadow-dark-primary/20 transition-all">
+            <div class="w-12 h-12 bg-dark-primary rounded-lg flex items-center justify-center mb-4 mx-auto">
+              <span class="text-dark-bg-primary text-xl font-bold">⚡</span>
+            </div>
+            <h3 class="text-lg font-semibold text-dark-primary mb-2">Electric Performance</h3>
+            <p class="text-sm text-dark-text-secondary">Hochperformante Blockchain-Implementierungen mit Electric Cyan Akzenten</p>
+          </div>
+          
+          <div class="bg-dark-bg-accent p-6 rounded-lg border border-dark-border text-center hover:shadow-lg hover:shadow-dark-secondary/20 transition-all">
+            <div class="w-12 h-12 bg-dark-secondary rounded-lg flex items-center justify-center mb-4 mx-auto">
+              <span class="text-white text-xl font-bold">🔮</span>
+            </div>
+            <h3 class="text-lg font-semibold text-dark-secondary mb-2">Deep Purple Logic</h3>
+            <p class="text-sm text-dark-text-secondary">Komplexe Algorithmen und Deep Purple Hervorhebungen für technische Tiefe</p>
+          </div>
+          
+          <div class="bg-dark-bg-accent p-6 rounded-lg border border-dark-border text-center hover:shadow-lg hover:shadow-dark-accent/20 transition-all">
+            <div class="w-12 h-12 bg-dark-accent rounded-lg flex items-center justify-center mb-4 mx-auto">
+              <span class="text-dark-bg-primary text-xl font-bold">🌱</span>
+            </div>
+            <h3 class="text-lg font-semibold text-dark-accent mb-2">Electric Green Growth</h3>
+            <p class="text-sm text-dark-text-secondary">Nachhaltiges Wachstum durch Electric Green Innovationen</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Example Section -->
+    <section class="py-16 px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-dark-primary text-center mb-12">
+          Code Implementierung
+        </h2>
+        
+        <div class="bg-dark-bg-accent p-8 rounded-lg border border-dark-border">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-semibold text-dark-primary">Blockchain Smart Contract</h3>
+            <div class="flex gap-2">
+              <div class="w-3 h-3 bg-dark-accent rounded-full"></div>
+              <div class="w-3 h-3 bg-dark-secondary rounded-full"></div>
+              <div class="w-3 h-3 bg-dark-primary rounded-full"></div>
+            </div>
+          </div>
+          
+          <pre class="bg-dark-bg-primary p-4 rounded border border-dark-border overflow-x-auto font-mono text-sm">
+<code class="text-dark-text-primary">
+<span class="text-dark-secondary">pragma solidity</span> <span class="text-dark-accent">^0.8.0</span>;
+
+<span class="text-dark-secondary">contract</span> <span class="text-dark-primary">DigitalTwin</span> &#123;
+    <span class="text-dark-secondary">mapping</span>(<span class="text-dark-accent">address</span> =&gt; <span class="text-dark-accent">bool</span>) <span class="text-dark-text-secondary">public authorizedUsers</span>;
+    
+    <span class="text-dark-secondary">event</span> <span class="text-dark-primary">TwinCreated</span>(<span class="text-dark-accent">address indexed creator</span>, <span class="text-dark-accent">uint256 twinId</span>);
+    
+    <span class="text-dark-secondary">function</span> <span class="text-dark-primary">createDigitalTwin</span>(<span class="text-dark-accent">bytes32 _hash</span>) <span class="text-dark-secondary">external</span> &#123;
+        <span class="text-dark-secondary">require</span>(<span class="text-dark-text-secondary">authorizedUsers</span>[<span class="text-dark-accent">msg.sender</span>], <span class="text-dark-accent">"Unauthorized"</span>);
+        <span class="text-dark-text-muted">// Implementation logic...</span>
+    &#125;
+&#125;
+</code>
+          </pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Cards Grid -->
+    <section class="py-16 px-8 bg-dark-bg-secondary">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-dark-primary text-center mb-12">
+          Technische Schwerpunkte
+        </h2>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-dark-bg-accent p-8 rounded-lg border border-dark-border hover:shadow-lg hover:shadow-dark-primary/20 transition-all">
+            <div class="w-12 h-12 bg-gradient-to-br from-dark-primary to-dark-secondary rounded-lg flex items-center justify-center mb-6">
+              <span class="text-white text-xl font-bold">🔗</span>
+            </div>
+            <h3 class="text-xl font-semibold text-dark-primary mb-4">
+              Smart Contract Architecture
+            </h3>
+            <p class="text-dark-text-secondary mb-4">
+              Entwicklung fortschrittlicher Smart Contract Architekturen für 
+              sichere und skalierbare Blockchain-Anwendungen.
+            </p>
+            <ul class="text-sm text-dark-text-muted space-y-2">
+              <li class="flex items-center gap-2">
+                <span class="text-dark-accent">▶</span> 
+                Gas-optimierte Implementierungen
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-dark-accent">▶</span> 
+                Multi-Signature Sicherheit
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-dark-accent">▶</span> 
+                Upgradeable Proxy Patterns
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-dark-bg-accent p-8 rounded-lg border border-dark-border hover:shadow-lg hover:shadow-dark-secondary/20 transition-all">
+            <div class="w-12 h-12 bg-gradient-to-br from-dark-secondary to-dark-accent rounded-lg flex items-center justify-center mb-6">
+              <span class="text-white text-xl font-bold">🚀</span>
+            </div>
+            <h3 class="text-xl font-semibold text-dark-secondary mb-4">
+              Performance Optimization
+            </h3>
+            <p class="text-dark-text-secondary mb-4">
+              Hochperformante Algorithmen und Datenstrukturen für 
+              effiziente Blockchain-Operationen und Skalierbarkeit.
+            </p>
+            <ul class="text-sm text-dark-text-muted space-y-2">
+              <li class="flex items-center gap-2">
+                <span class="text-dark-secondary">▶</span> 
+                Layer 2 Integration
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-dark-secondary">▶</span> 
+                State Channel Implementation
+              </li>
+              <li class="flex items-center gap-2">
+                <span class="text-dark-secondary">▶</span> 
+                Zero-Knowledge Proofs
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Documentation Style -->
+    <section class="py-16 px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-dark-bg-accent p-8 rounded-lg border border-dark-border">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-8 h-8 bg-dark-primary rounded flex items-center justify-center">
+              <span class="text-dark-bg-primary font-bold text-sm">API</span>
+            </div>
+            <h3 class="text-xl font-semibold text-dark-primary">Technical Documentation</h3>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="bg-dark-bg-primary p-4 rounded border border-dark-border">
+              <div class="flex items-center gap-4 mb-2">
+                <span class="px-2 py-1 bg-dark-accent text-dark-bg-primary text-xs font-bold rounded">GET</span>
+                <code class="text-dark-primary font-mono">/api/digital-twins/&#123;id&#125;</code>
+              </div>
+              <p class="text-sm text-dark-text-secondary">Retrieve digital twin information and metadata</p>
+            </div>
+            
+            <div class="bg-dark-bg-primary p-4 rounded border border-dark-border">
+              <div class="flex items-center gap-4 mb-2">
+                <span class="px-2 py-1 bg-dark-secondary text-white text-xs font-bold rounded">POST</span>
+                <code class="text-dark-primary font-mono">/api/digital-twins/create</code>
+              </div>
+              <p class="text-sm text-dark-text-secondary">Create new digital twin with blockchain binding</p>
+            </div>
+            
+            <div class="bg-dark-bg-primary p-4 rounded border border-dark-border">
+              <div class="flex items-center gap-4 mb-2">
+                <span class="px-2 py-1 bg-dark-primary text-dark-bg-primary text-xs font-bold rounded">PUT</span>
+                <code class="text-dark-primary font-mono">/api/digital-twins/&#123;id&#125;/verify</code>
+              </div>
+              <p class="text-sm text-dark-text-secondary">Verify digital twin authenticity and signatures</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</PageLayout>

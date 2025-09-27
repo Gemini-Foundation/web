@@ -1,0 +1,141 @@
+---
+import PageLayout from "@layouts/PageLayout.astro"
+import { SITE } from "@consts"
+---
+
+<PageLayout title="Über uns" description="Die Gemini Foundation setzt sich für offene digitale Infrastrukturen ein." theme="light">
+  <div class="bg-light-bg-primary min-h-screen font-serif">
+    <!-- Hero Section -->
+    <section class="relative py-24 px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-light-primary mb-6">
+          Über die Gemini Stiftung
+        </h1>
+        <p class="text-xl text-light-text-secondary max-w-3xl mx-auto">
+          Wir sind eine gemeinnützige <strong>Forschungsstiftung auf dem Gebiet digitaler Zwillinge</strong> mit Fokus auf Blockchain-basierte Bindungstechnologien.
+        </p>
+      </div>
+    </section>
+
+    <!-- Research Focus Section -->
+    <section class="py-16 px-8 bg-light-bg-secondary">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-light-primary mb-6">
+            Forschung und Wissenschaft
+          </h2>
+          <p class="text-light-text-secondary max-w-4xl mx-auto text-lg">
+            Unser aktueller Fokus liegt auf der Entwicklung von <strong>Blockchain-basierten Bindungstechnologien</strong>, 
+            die reale und digitale Entitäten sicher, nachvollziehbar und rechtlich wirksam miteinander verknüpfen.
+          </p>
+        </div>
+        
+        <div class="bg-light-bg-primary p-8 rounded-lg border border-light-border mb-8">
+          <h3 class="text-xl font-semibold text-light-primary mb-6">
+            Was Gemini anders macht
+          </h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-light-border">
+                  <th class="text-left p-3 font-semibold text-light-primary">Kriterium</th>
+                  <th class="text-left p-3 font-semibold text-light-text-secondary">Reine Open Source Entwicklung</th>
+                  <th class="text-left p-3 font-semibold text-light-primary">Gemeinnützige Forschung & Entwicklung</th>
+                </tr>
+              </thead>
+              <tbody class="text-light-text-secondary">
+                <tr class="border-b border-light-border/50">
+                  <td class="p-3 font-medium">Ziel</td>
+                  <td class="p-3">Funktionierendes Produkt / Anwendung</td>
+                  <td class="p-3 text-light-primary font-medium">Gewinn neuer Erkenntnisse, Beitrag zur Wissenschaft</td>
+                </tr>
+                <tr class="border-b border-light-border/50">
+                  <td class="p-3 font-medium">Vorgehen</td>
+                  <td class="p-3">Engineering, pragmatisch, lösungsorientiert</td>
+                  <td class="p-3 text-light-primary font-medium">Systematisch, dokumentiert, mit Forschungsfragen</td>
+                </tr>
+                <tr class="border-b border-light-border/50">
+                  <td class="p-3 font-medium">Dokumentation</td>
+                  <td class="p-3">ggf. Code und README</td>
+                  <td class="p-3 text-light-primary font-medium">zusätzlich Methodik, Herleitung, Begründung</td>
+                </tr>
+                <tr class="border-b border-light-border/50">
+                  <td class="p-3 font-medium">Verwertung</td>
+                  <td class="p-3">Veröffentlichung genügt nicht allein</td>
+                  <td class="p-3 text-light-primary font-medium">Ergebnisse müssen <strong>dem Allgemeinwohl dienen</strong></td>
+                </tr>
+                <tr>
+                  <td class="p-3 font-medium">Open Source</td>
+                  <td class="p-3">positiv, aber kein Selbstzweck</td>
+                  <td class="p-3 text-light-primary font-medium"><strong>wichtiges Mittel</strong>, nicht Selbstzweck</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Focus Areas Section -->
+    <section class="py-16 px-8">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-light-primary text-center mb-12">
+          Unsere Schwerpunkte
+        </h2>
+	<div class="grid md:grid-cols-2 gap-8">
+
+          <div class="bg-light-bg-secondary p-8 rounded-lg border border-light-border hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-light-secondary rounded-lg flex items-center justify-center mb-6">
+              <span class="text-white text-xl font-bold">⤄</span>
+            </div>
+            <h3 class="text-xl font-semibold text-light-primary mb-4">
+              Digital verschränkte Vermögenswerte
+            </h3>
+            <p class="text-light-text-secondary mb-4">
+              Entwicklung von Smart Contracts mit kontrollierbaren Zugriffsrechten und signaturbasierten Eigentumsnachweisen.
+            </p>
+            <ul class="text-sm text-light-text-muted space-y-2">
+              <li>• Notariell einbindbare Token-Infrastruktur</li>
+              <li>• Rechtssichere Eigentumsübertragung</li>
+              <li>• Interoperabilität zwischen Systemen</li>
+            </ul>
+          </div>
+          
+          <div class="bg-light-bg-secondary p-8 rounded-lg border border-light-border hover:shadow-lg transition-shadow">
+            <div class="w-12 h-12 bg-light-secondary rounded-lg flex items-center justify-center mb-6">
+		    <span class="text-white text-xl font-bold">iD</span>
+            </div>
+            <h3 class="text-xl font-semibold text-light-primary mb-4">
+              Offene Identitätsnachweise & Nachweisketten
+            </h3>
+            <p class="text-light-text-secondary mb-4">
+              Self-Sovereign Identity Lösungen basierend auf asymmetrischer Kryptografie nach BSI/ETSI-Standards.
+            </p>
+            <ul class="text-sm text-light-text-muted space-y-2">
+              <li>• Verifizierbare Claims (Bildung, Gesundheit)</li>
+              <li>• Datenschutzkonforme Nachweise</li>
+              <li>• Dezentrale Identitätsverwaltung</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-16 px-8 bg-light-bg-secondary">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-light-primary mb-6">
+          Gemeinnützige Arbeit
+        </h2>
+        <p class="text-light-text-secondary mb-8">
+          Die Gemini Foundation ist als gemeinnützige Organisation anerkannt und arbeitet ausschließlich im öffentlichen Interesse. Unsere Forschung und Entwicklung dient der Förderung von Wissenschaft, Bildung und gesellschaftlicher Teilhabe.
+        </p>
+        <div class="bg-light-bg-primary p-6 rounded-lg border border-light-border">
+          <p class="text-light-text-muted text-sm">
+            Alle unsere Projekte sind Open Source und stehen der Allgemeinheit zur Verfügung. Wir führen keine kommerziellen Aktivitäten durch und bieten keine individualisierten Dienstleistungen an.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+</PageLayout>

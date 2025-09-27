@@ -1,0 +1,183 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import SearchCollection from "@components/SearchCollection";
+import { PROJECTS } from "@consts";
+import type { CollectionEntry } from "astro:content";
+
+const projects = (await getCollection("projects"))
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const tags = [
+  ...new Set(projects.flatMap((project) => project.data.tags)),
+].sort((a, b) => a.localeCompare(b));
+
+const estimated_initial_size =
+  28 + projects.length * 158 + (projects.length - 1) * 12;
+---
+
+<PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION} theme="light">
+  <div class="bg-light-bg-primary min-h-screen font-serif">
+    <!-- Hero Section -->
+    <section class="relative py-24 px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-light-primary mb-6">
+          Prototypen
+        </h1>
+        <p class="text-xl text-light-text-secondary max-w-3xl mx-auto">
+          Open Source Forschungsprototypen und experimentelle Implementierungen für Blockchain-basierte Bindungstechnologien.
+        </p>
+      </div>
+    </section>
+
+    <!-- Research Prototype Info -->
+    <section class="py-16 px-8 bg-light-bg-secondary">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-light-primary mb-6">
+            Forschungsprototypen
+          </h2>
+          <p class="text-light-text-secondary max-w-4xl mx-auto text-lg">
+            Unsere Prototypen dienen der wissenschaftlichen Erforschung von <strong>digitalen Zwillingen</strong> und 
+            <strong>Blockchain-basierten Bindungstechnologien</strong>. Sie sind experimentelle Implementierungen 
+            zur Validierung von Forschungsthesen und werden ausschließlich für gemeinnützige Zwecke entwickelt.
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-light-bg-primary p-6 rounded-lg border border-light-border text-center">
+            <div class="w-12 h-12 bg-light-secondary rounded-lg flex items-center justify-center mb-4 mx-auto">
+              <span class="text-white text-xl font-bold">🔬</span>
+            </div>
+            <h3 class="text-lg font-semibold text-light-primary mb-2">Experimentell</h3>
+            <p class="text-sm text-light-text-secondary">Prototypen zur Validierung wissenschaftlicher Hypothesen und Forschungsfragen</p>
+          </div>
+          
+          <div class="bg-light-bg-primary p-6 rounded-lg border border-light-border text-center">
+            <div class="w-12 h-12 bg-light-secondary rounded-lg flex items-center justify-center mb-4 mx-auto">
+              <span class="text-white text-xl font-bold">📖</span>
+            </div>
+            <h3 class="text-lg font-semibold text-light-primary mb-2">Dokumentiert</h3>
+            <p class="text-sm text-light-text-secondary">Vollständige Dokumentation von Methodik, Herleitung und Begründung</p>
+          </div>
+          
+          <div class="bg-light-bg-primary p-6 rounded-lg border border-light-border text-center">
+            <div class="w-12 h-12 bg-light-secondary rounded-lg flex items-center justify-center mb-4 mx-auto">
+              <span class="text-white text-xl font-bold">🤝</span>
+            </div>
+            <h3 class="text-lg font-semibold text-light-primary mb-2">Gemeinnützig</h3>
+            <p class="text-sm text-light-text-secondary">Entwicklung ausschließlich für Wissenschaft und Allgemeinwohl</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Focus Areas -->
+    <section class="py-16 px-8">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-light-primary text-center mb-12">
+          Forschungsbereiche
+        </h2>
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <div class="bg-light-bg-secondary p-8 rounded-lg border border-light-border">
+            <div class="w-12 h-12 bg-light-secondary rounded-lg flex items-center justify-center mb-6">
+              <span class="text-white text-xl font-bold">🔗</span>
+            </div>
+            <h3 class="text-xl font-semibold text-light-primary mb-4">
+              Bindungstechnologien
+            </h3>
+            <p class="text-light-text-secondary mb-4">
+              Erforschung von Mechanismen zur sicheren, nachvollziehbaren und rechtlich wirksamen 
+              Verknüpfung realer und digitaler Entitäten.
+            </p>
+            <ul class="text-sm text-light-text-muted space-y-2">
+              <li>• Signaturbasierte Eigentumsmodelle</li>
+              <li>• Nachvollziehbare digitale Vertragswerke</li>
+              <li>• Rechtlich referenzierbare Smart Contracts</li>
+            </ul>
+          </div>
+          
+          <div class="bg-light-bg-secondary p-8 rounded-lg border border-light-border">
+            <div class="w-12 h-12 bg-light-secondary rounded-lg flex items-center justify-center mb-6">
+              <span class="text-white text-xl font-bold">🆔</span>
+            </div>
+            <h3 class="text-xl font-semibold text-light-primary mb-4">
+              Dezentrale Identitäten
+            </h3>
+            <p class="text-light-text-secondary mb-4">
+              Entwicklung von Self-Sovereign Identity Lösungen nach europäischen Standards 
+              für vertrauensvolle digitale Identitätsnachweise.
+            </p>
+            <ul class="text-sm text-light-text-muted space-y-2">
+              <li>• Nicht-übertragbare Nachweise (Bildung, Gesundheit)</li>
+              <li>• BSI/eIDAS/ETSI-konforme Implementierungen</li>
+              <li>• Dezentrale Identitätsanker</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prototypes Section -->
+    <section class="py-16 px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-light-primary text-center mb-12">
+          Aktuelle Prototypen
+        </h2>
+        {projects.length > 0 ? (
+          <div
+            id="search-collection-wrapper"
+            class="animate"
+            style={{ minHeight: `${estimated_initial_size}px` }}
+          >
+            <SearchCollection
+              client:load
+              entry_name={"projects"}
+              tags={tags}
+              data={projects}
+            />
+          </div>
+        ) : (
+          <div class="bg-light-bg-secondary p-8 rounded-lg border border-light-border text-center">
+            <h3 class="text-xl font-semibold text-light-primary mb-4">
+              Prototypen in Entwicklung
+            </h3>
+            <p class="text-light-text-secondary mb-6">
+              Unsere Forschungsprototypen befinden sich derzeit in der Entwicklungsphase. 
+              Erste experimentelle Implementierungen werden nach Abschluss der Grundlagenforschung veröffentlicht.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 text-left">
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Asset Interlinking Prototype</h4>
+                <p class="text-sm text-light-text-secondary">Experimentelle Implementierung von Bindungsmechanismen zwischen physischen und digitalen Assets</p>
+                <div class="text-xs text-light-text-muted mt-2">Status: Konzeptphase</div>
+              </div>
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Identity Verification Chain</h4>
+                <p class="text-sm text-light-text-secondary">Prototyp für dezentrale Identitätsnachweise im Bildungs- und Gesundheitsbereich</p>
+                <div class="text-xs text-light-text-muted mt-2">Status: Forschungsphase</div>
+              </div>
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Municipal Blockchain Toolkit</h4>
+                <p class="text-sm text-light-text-secondary">Forschungsprototyp für Blockchain-Integration in kommunalen Verwaltungsprozessen</p>
+                <div class="text-xs text-light-text-muted mt-2">Status: Anforderungsanalyse</div>
+              </div>
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Trust Relationship Framework</h4>
+                <p class="text-sm text-light-text-secondary">Experimentelle Umsetzung von Vertrauensmechanismen in offenen Systemen</p>
+                <div class="text-xs text-light-text-muted mt-2">Status: Literaturanalyse</div>
+              </div>
+            </div>
+            <div class="mt-6 p-4 bg-light-bg-primary rounded border border-light-border">
+              <p class="text-sm text-light-text-muted">
+                <strong>Hinweis:</strong> Alle Prototypen werden unter Open Source Lizenzen veröffentlicht und 
+                dienen ausschließlich der wissenschaftlichen Forschung und dem Allgemeinwohl.
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  </div>
+</PageLayout>

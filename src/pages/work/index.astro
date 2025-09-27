@@ -1,0 +1,158 @@
+---
+import { getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import { WORK } from "@consts"
+
+const collection = await getCollection("work")
+
+collection.sort((a, b) => new Date(b.data.dateStart).getTime() - new Date(a.data.dateStart).getTime())
+
+const work = await Promise.all(
+  collection.map(async (item) => {
+    const { Content } = await item.render()
+    return { ...item, Content }
+  })
+)
+
+function formatWorkDate(input: Date | string) {
+  if (typeof input === "string") return input
+
+  const month = input.toLocaleDateString("de-DE", {
+    month: "short",
+  })
+
+  const year = new Date(input).getFullYear()
+  return `${month} ${year}`
+}
+---
+
+<PageLayout title={WORK.TITLE} description={WORK.DESCRIPTION} theme="light">
+  <div class="bg-light-bg-primary min-h-screen font-serif">
+    <!-- Hero Section -->
+    <section class="relative py-24 px-8">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-light-primary mb-6">
+          Unsere Forschung
+        </h1>
+        <p class="text-xl text-light-text-secondary max-w-3xl mx-auto">
+          Wissenschaftliche Arbeiten und Forschungsprojekte im Bereich digitaler Zwillinge und Blockchain-basierte Bindungstechnologien.
+        </p>
+      </div>
+    </section>
+
+    <!-- Research Methods Section -->
+    <section class="py-16 px-8 bg-light-bg-secondary">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold text-light-primary text-center mb-12">
+          Blockchain-Forschung im Zentrum
+        </h2>
+        <div class="text-center mb-8">
+          <p class="text-light-text-secondary max-w-4xl mx-auto text-lg">
+            Im Zentrum unserer Arbeit steht derzeit die Blockchain-Technologie als <strong>Trägerin verlässlicher digitaler Zustände</strong>. 
+            Wir nutzen sie, um neue Bindungsqualitäten zwischen realen und digitalen Objekten zu erforschen.
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-light-bg-primary p-6 rounded-lg border border-light-border">
+            <h3 class="text-xl font-semibold text-light-primary mb-4">Forschungsansatz</h3>
+            <ul class="space-y-3 text-light-text-secondary">
+              <li class="flex items-start gap-3">
+                <span class="text-light-secondary font-bold">•</span>
+                <span><strong>grundlagenorientiert:</strong> Analyse systemischer Eigenschaften und Limitierungen</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-light-secondary font-bold">•</span>
+                <span><strong>anwendungsbezogen:</strong> Prototypische Umsetzungen für reale Szenarien</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-light-secondary font-bold">•</span>
+                <span><strong>öffentlich zugänglich:</strong> Open Access / Open Source Ergebnisse</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-light-bg-primary p-6 rounded-lg border border-light-border">
+            <h3 class="text-xl font-semibold text-light-primary mb-4">Aktuelle Schwerpunkte</h3>
+            <ul class="space-y-3 text-light-text-secondary">
+              <li class="flex items-start gap-3">
+                <span class="text-light-secondary font-bold">•</span>
+                <span><strong>Signaturbasierte Eigentumsmodelle</strong> statt bloßer Wallet-Zuweisung</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-light-secondary font-bold">•</span>
+                <span><strong>Nachvollziehbare digitale Vertragswerke</strong>, rechtlich referenzierbar</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-light-secondary font-bold">•</span>
+                <span><strong>Nicht-übertragbare Nachweise</strong> (Bildung, Gesundheit)</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-light-secondary font-bold">•</span>
+                <span><strong>Dezentrale Identitätsanker</strong> nach EU-Standards (BSI, eIDAS, ETSI)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Projects Section -->
+    <section class="py-16 px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold text-light-primary text-center mb-12">
+          Forschungsprojekte
+        </h2>
+        {work.length > 0 ? (
+          <ul class="space-y-12">
+            { 
+              work.map((entry) => (
+                <li class="bg-light-bg-secondary p-8 rounded-lg border border-light-border hover:shadow-lg transition-shadow">
+                  <div class="text-sm uppercase text-light-secondary font-medium mb-4">
+                    {formatWorkDate(entry.data.dateStart)} - {formatWorkDate(entry.data.dateEnd)}
+                  </div>
+                  <div class="text-light-primary font-bold text-2xl mb-2">
+                    {entry.data.company}
+                  </div>
+                  <div class="text-lg font-semibold text-light-text-secondary mb-6">
+                    {entry.data.role}
+                  </div>
+                  <article class="prose prose-lg max-w-none text-light-text-primary">
+                    <entry.Content />
+                  </article>
+                </li>
+              ))
+            }
+          </ul>
+        ) : (
+          <div class="bg-light-bg-secondary p-8 rounded-lg border border-light-border text-center">
+            <h3 class="text-xl font-semibold text-light-primary mb-4">
+              Kommende Forschungsprojekte
+            </h3>
+            <p class="text-light-text-secondary mb-6">
+              Unsere Forschungsarbeiten befinden sich in der Aufbauphase. Folgende Projekte sind in Vorbereitung:
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 text-left">
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Digital Asset Interlinking</h4>
+                <p class="text-sm text-light-text-secondary">Erforschung von Bindungsmechanismen zwischen physischen und digitalen Vermögenswerten</p>
+              </div>
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Civic Identity Toolkit</h4>
+                <p class="text-sm text-light-text-secondary">Entwicklung dezentraler Identitätslösungen für öffentliche Institutionen</p>
+              </div>
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Verification Chains</h4>
+                <p class="text-sm text-light-text-secondary">Open Source Nachweisketten für Bildungs- und Gesundheitszertifikate</p>
+              </div>
+              <div class="bg-light-bg-primary p-4 rounded border border-light-border">
+                <h4 class="font-semibold text-light-primary mb-2">Municipal Blockchain Integration</h4>
+                <p class="text-sm text-light-text-secondary">Blockchain-Integration für kommunale Verwaltungsprozesse</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  </div>
+</PageLayout>

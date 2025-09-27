@@ -1,0 +1,36 @@
+---
+import "@styles/global.css"
+import BaseHead from "@components/BaseHead.astro"
+import Header from "@components/Header.astro"
+import Footer from "@components/Footer.astro"
+import Drawer from "@components/Drawer.astro"
+const { title, description, theme = "light" } = Astro.props
+import { SITE } from "@consts"
+
+// Determine theme class based on page type
+const getThemeClass = (pageTitle: string, currentTheme: string) => {
+  // Only explicit dark theme
+  if (currentTheme === 'dark') {
+    return 'dark'
+  }
+  // Light theme for everything else (home, blog, work, about, projects)
+  return ''
+}
+
+const themeClass = getThemeClass(title, theme)
+---
+
+<!doctype html>
+<html lang="de" class={themeClass}>
+  <head>
+    <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
+  </head>
+  <body class={themeClass ? 'bg-dark-bg-primary text-dark-text-primary font-sans' : 'bg-light-bg-primary text-light-text-primary font-serif'}>
+    <Header theme={themeClass || 'light'} />
+    <Drawer />
+    <main>
+      <slot />
+    </main>
+    <Footer theme={themeClass || 'light'} />
+  </body>
+</html>
