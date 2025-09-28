@@ -13,7 +13,7 @@ Das SNFT-Forschungsprojekt (Signal-Secured Non-Fungible Token Framework) stellt 
 
 **Kernfrage:** Wie können digitale Tokens so gestaltet werden, dass sie rechtlich eindeutig als reine Nutzungsrechte klassifiziert werden, während sie gleichzeitig sichere und nachvollziehbare Eigentumsübertragungen realer Assets ermöglichen?
 
-**Methodischer Ansatz:** Aufbauend auf den GMN001-Erkenntnissen wird ein signaturbasiertes Token-System entwickelt, das explizit **nicht übertragbar, nicht handelbar und nicht spekulativ** ist.
+**Methodischer Ansatz:** Aufbauend auf den GMN001-Erkenntnissen wird ein signaturbasiertes Token-System entwickelt, das explizit **direkt übertragbar, direkt handelbar (jeweils ohne gatekeeper) und eine physische Rückkopplung (Verschränkung) besitzt** ist.
 
 ## Technische Innovation
 
@@ -43,7 +43,7 @@ Das Projekt validiert empirisch, dass Token-basierte Systeme ohne finanzielle Ch
 - **Skalierbarkeit:** Effiziente Verarbeitung bei gleichzeitiger Wahrung der Auditierbarkeit
 
 ### Gesellschaftliche Implikationen
-Das SNFT-Framework demonstriert, wie Blockchain-Technologie für **Grundrechte statt Spekulation** eingesetzt werden kann. Es zeigt praktische Wege auf, wie digitale Infrastrukturen demokratisch kontrolliert und gemeinnützig betrieben werden können.
+Das SNFT-Framework demonstriert, wie Blockchain-Technologie für **Güteridentitäten** eingesetzt werden kann. Es zeigt praktische Wege auf, wie digitale Infrastrukturen demokratisch kontrolliert und gemeinnützig betrieben werden können.
 
 ## Aktuelle Forschungsphase
 

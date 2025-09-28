@@ -6,8 +6,7 @@ import solidJs from "@astrojs/solid-js"
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-sphere-demo.vercel.app",
-  base: "./",
+  site: "https://gemini-stiftung.de",
   build: {
     format: "directory"
   },
