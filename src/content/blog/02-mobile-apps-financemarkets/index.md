@@ -37,7 +37,7 @@ Im Ergebnis lassen sich mobile Trading-Apps als Ausdruck eines **Ambivalenzmuste
 
 ---
 
-Mögliche zitierfähige Quellen:
+## Literatur
 
 * Barber, B. M., & Odean, T. (2009). *The Behavior of Individual Investors*. SSRN Electronic Journal.
 * Glaser, F., & Walther, T. (2013). Run, Walk, or Buy? Financial Literacy and the Temperament of Investors. *Journal of Behavioral Finance*.
