@@ -13,7 +13,6 @@ tags:
 ---
 
 
-# Digitale Bildung und Tokenisierung: Gesellschaftliche Chancen und Risiken für junge Menschen
 
 Die zunehmende Integration von Blockchain-Technologien in zentrale gesellschaftliche Bereiche wirft grundlegende Fragen hinsichtlich der Bildung und Sozialisation junger Menschen auf. Die Tokenisierung von Werten und Rechten kann die gesellschaftliche Teilhabe der nächsten Generation auf neue Weise prägen, indem sie etablierte Konzepte von Eigentum, Partizipation und Risiko verändert. In dieser Betrachtung werden die Chancen und Risiken dieser Entwicklung aus bildungswissenschaftlicher und soziologischer Perspektive untersucht.
 

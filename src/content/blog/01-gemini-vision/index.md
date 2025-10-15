@@ -11,7 +11,6 @@ tags:
 ---
 
 
-# Die Gemini-Stiftung: Forschung für ein digitales Gemeinwesen
 
 In einer zunehmend digitalen Welt dürfen zentrale Infrastrukturen wie Eigentumszuweisung, Identitätsprüfung und Zugangsrechte nicht exklusiv in den Händen großer Konzerne liegen. Die **Gemini-Stiftung** versteht sich als **gemeinnützige Forschungsstiftung**, die diese essenziellen Fragen im öffentlichen Interesse untersucht und neue Denk- und Lösungsansätze entwickelt.
 

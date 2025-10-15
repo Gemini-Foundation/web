@@ -13,7 +13,6 @@ tags:
 ---
 
 
-# Mobile Trading-Apps: Demokratisierung oder neue Abhängigkeiten?
 
 Die zunehmende Verbreitung mobiler Trading-Anwendungen stellt ein paradigmatisches Beispiel für die Ambivalenz technologischer Innovation dar. Einerseits versprechen diese Plattformen eine **Demokratisierung des Zugangs** zu Finanzmärkten, indem sie die bisherigen Eintrittsbarrieren – Fachwissen, institutionelle Strukturen und Kapitalerfordernisse – erheblich senken. Andererseits schaffen sie neue **systemische Abhängigkeiten**, die Fragen nach Transparenz, Kontrolle und gesellschaftlichen Nebenwirkungen aufwerfen.
 

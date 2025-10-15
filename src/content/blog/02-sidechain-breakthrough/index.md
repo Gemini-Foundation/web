@@ -12,7 +12,6 @@ tags:
   - Performance-Optimierung
 ---
 
-# Sidechain-Architekturen: Skalierungsansätze und ihre systemischen Auswirkungen
 
 ## Forschungskontext
 

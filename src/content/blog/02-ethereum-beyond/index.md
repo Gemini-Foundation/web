@@ -13,7 +13,6 @@ tags:
 ---
 
 
-## Von der Hashkette zum global verteilten Computer
 
 Die Einführung der Blockchain-Technologie durch Bitcoin markiert einen paradigmatischen Wandel in der Organisation verteilter Systeme. Zentrales technisches Fundament bildet die **Hash-Nachweiskette** (Blockchain), in der jede Informationseinheit kryptographisch mit ihrem Vorgängerblock verknüpft ist. Dieses Verfahren gewährleistet eine inhärente **Unveränderlichkeit** der Datenhistorie und ermöglicht die Etablierung eines globalen, dezentralisierten Konsensmechanismus ohne zentrale Kontrollinstanz (Nakamoto, 2008). Im Fall von Bitcoin manifestiert sich diese Architektur primär in der Form eines „distributed ledger“, dessen alleinige Funktion die Validierung und Dokumentation monetärer Transaktionen ist.
 

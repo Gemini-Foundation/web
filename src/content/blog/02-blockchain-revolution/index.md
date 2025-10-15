@@ -12,7 +12,6 @@ tags:
   - Digitalisierung
 ---
 
-# Digitale Infrastrukturen im Wandel: Beobachtungen zur Blockchain-Entwicklung
 
 ## Forschungskontext
 

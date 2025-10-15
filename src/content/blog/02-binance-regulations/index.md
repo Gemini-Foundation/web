@@ -13,7 +13,6 @@ tags:
 ---
 
 
-# Zentralisierte Börsen unter Regulierungsdruck: Pseudo-Dezentralisierung als Ausweichstrategie
 
 Die Reaktion zentralisierter Kryptobörsen auf zunehmenden Regulierungsdruck stellt ein aufschlussreiches Beispiel für systemische Anpassungsstrategien dar. In wissenschaftlicher Perspektive zeigt sich, dass Unternehmen den Begriff *Dezentralisierung* häufig instrumentell verwenden, um regulatorische Beschränkungen zu umgehen, ohne die zugrunde liegenden Macht- und Kontrollstrukturen tatsächlich aufzugeben (Zhang, 2024; Hägele, 2024). Diese Beobachtung verweist auf grundlegende Paradoxien in der Wechselwirkung zwischen Regulierung, Marktanpassung und technologischer Semantik.
 

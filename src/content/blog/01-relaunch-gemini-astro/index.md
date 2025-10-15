@@ -11,7 +11,6 @@ tags:
   - Deutschsprachiger Raum
 ---
 
-# Ein neuer Auftritt für die Gemini Stiftung: Relaunch mit Astro und offener Architektur
 
 Mit dem heutigen Tag präsentiert sich die Gemini Stiftung mit einem grundlegend überarbeiteten Webauftritt. Der Relaunch erfolgt unter dem Anspruch, die wissenschaftlichen Inhalte und Ziele der Stiftung noch deutlicher sichtbar zu machen – und zwar in einem klar strukturierten, barrierearmen und modernen Design, entwickelt mit dem Open-Source-Framework Astro.
 

@@ -13,8 +13,6 @@ tags:
 ---
 
 
-# Soziotechnische Transformationen: Dezentrale Systeme und die Veränderung gesellschaftlicher Wahrnehmungsmuster
-
 ## Einleitung und Forschungskontext
 
 Die Einführung blockchain-basierter Infrastrukturen stellt einen paradigmatischen Fall technologisch induzierter gesellschaftlicher Transformation dar. Im Zentrum dieser Betrachtung steht die Frage, wie sich die technologischen Eigenschaften dezentraler Systeme in gesellschaftlichen Wahrnehmungsmustern manifestieren und welche kulturellen Implikationen sich daraus langfristig ergeben.

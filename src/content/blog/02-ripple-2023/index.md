@@ -13,7 +13,6 @@ tags:
 ---
 
 
-## Marktzyklen und Regulierungsparadoxien: Eine systemische Betrachtung großer Blockchain-Projekte
 
 Die Entwicklung großskaliger Blockchain-Projekte wie Bitcoin, Ethereum und Ripple verdeutlicht die Vielschichtigkeit soziotechnischer Transformationen, die sich im Spannungsfeld zwischen technologischen Innovationszyklen, ökonomischen Marktmechanismen und regulatorischen Interventionen entfalten. Blockchain-Systeme können nicht als isolierte technische Artefakte betrachtet werden; vielmehr handelt es sich um gesellschaftlich eingebettete Institutionen, deren Strukturen und Dynamiken durch Rückkopplungseffekte geprägt sind (Atzori 2015; De Filippi & Wright 2018). Vor diesem Hintergrund stellt sich die zentrale Forschungsfrage, wie Marktzyklen und regulatorische Eingriffe die Entwicklungslogik dieser Projekte formen und welche Paradoxien dabei sichtbar werden.
 

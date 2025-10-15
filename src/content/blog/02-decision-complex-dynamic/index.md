@@ -13,7 +13,6 @@ tags:
 ---
 
 
-# Entscheidungsfindung in komplexen dynamischen Systemen: Eine wissenschaftliche Betrachtung
 
 ## 1. Einleitung
 
