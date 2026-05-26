@@ -3,6 +3,7 @@ title: "XFP: Qualitätsgesteuerte Quantisierung für effiziente LLM-Inferenz"
 summary: "Die Gemini Foundation veröffentlicht mit XFP ein neues Verfahren zur adaptiven Codebook-Quantisierung großer Sprachmodelle – mit Qualitätsgarantie statt manueller Bitraten-Wahl."
 date: "2026-05-19"
 draft: false
+paperUrl: "https://arxiv.org/abs/2605.14844"
 tags:
   - Publikation
   - Machine Learning

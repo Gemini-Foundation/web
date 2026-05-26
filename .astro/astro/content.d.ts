@@ -228,6 +228,118 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"03-abused-technology/index.md": {
+	id: "03-abused-technology/index.md";
+  slug: "03-abused-technology";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"04-crypto_tales-01-die_unsichtbare_vollmacht/index.md": {
+	id: "04-crypto_tales-01-die_unsichtbare_vollmacht/index.md";
+  slug: "04-crypto_tales-01-die_unsichtbare_vollmacht";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"04-crypto_tales-02-der_preiszauber/index.md": {
+	id: "04-crypto_tales-02-der_preiszauber/index.md";
+  slug: "04-crypto_tales-02-der_preiszauber";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"04-crypto_tales-03-das_phantom_volumen/index.md": {
+	id: "04-crypto_tales-03-das_phantom_volumen/index.md";
+  slug: "04-crypto_tales-03-das_phantom_volumen";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"04-crypto_tales-04-falsche_dezentralität/index.md": {
+	id: "04-crypto_tales-04-falsche_dezentralität/index.md";
+  slug: "04-crypto_tales-04-falsche_dezentralität";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"05-crypto_tales-05-gasfalle/index.md": {
+	id: "05-crypto_tales-05-gasfalle/index.md";
+  slug: "05-crypto_tales-05-gasfalle";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"06-crypto_tales-06-ewige_sicherheitslücke/index.md": {
+	id: "06-crypto_tales-06-ewige_sicherheitslücke/index.md";
+  slug: "06-crypto_tales-06-ewige_sicherheitslücke";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"07-crypto_tales-07-luftschlösser_der_tokenomics/index.md": {
+	id: "07-crypto_tales-07-luftschlösser_der_tokenomics/index.md";
+  slug: "07-crypto_tales-07-luftschlösser_der_tokenomics";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"08-crypto_tales-08-brücken_ins_nichts/index.md": {
+	id: "08-crypto_tales-08-brücken_ins_nichts/index.md";
+  slug: "08-crypto_tales-08-brücken_ins_nichts";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"09-crypto_tales-09-trügerische_stabilität/index.md": {
+	id: "09-crypto_tales-09-trügerische_stabilität/index.md";
+  slug: "09-crypto_tales-09-trügerische_stabilität";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"10-crypto_tales-10-falsche_demokratie/index.md": {
+	id: "10-crypto_tales-10-falsche_demokratie/index.md";
+  slug: "10-crypto_tales-10-falsche_demokratie";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"11-crypto_tales-11-schatten_der_regulierung/index.md": {
+	id: "11-crypto_tales-11-schatten_der_regulierung/index.md";
+  slug: "11-crypto_tales-11-schatten_der_regulierung";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"12-crypto_tales-12-ende_der_alten_geschichten/index.md": {
+	id: "12-crypto_tales-12-ende_der_alten_geschichten/index.md";
+  slug: "12-crypto_tales-12-ende_der_alten_geschichten";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"13-crypto-tales-kolumne-gemini/index.md": {
+	id: "13-crypto-tales-kolumne-gemini/index.md";
+  slug: "13-crypto-tales-kolumne-gemini";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"14-xfp-paper-release/index.md": {
+	id: "14-xfp-paper-release/index.md";
+  slug: "14-xfp-paper-release";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"15-snft-paper-release/index.md": {
+	id: "15-snft-paper-release/index.md";
+  slug: "15-snft-paper-release";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 };
 "legal": {
 "ACTIVITIES.md": {

@@ -3,6 +3,7 @@ title: "SNFT: Zero-Trust-Zertifizierung physisch verwahrter Vermögenswerte auf 
 summary: "Mit der SNFT-Spezifikation veröffentlicht die Gemini Foundation eine Smart-Contract-Architektur zur On-Chain-Zertifizierung physisch gelagerter Assets – unter strikter Rollentrennung und ohne Vertrauensvoraussetzung."
 date: "2026-05-26"
 draft: false
+paperUrl: "https://doi.org/10.5281/zenodo.20396191"
 tags:
   - Publikation
   - Blockchain
