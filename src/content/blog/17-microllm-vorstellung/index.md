@@ -2,7 +2,7 @@
 title: "microllm: Eine Adresse für alle Modelle. Die Modelle bleiben, wo sie rechnen."
 summary: "Wer Sprachmodelle selbst betreibt, hat schnell mehrere Maschinen, mehrere Modelle und mehrere Anwendungen. microllm ist ein schlanker LLM-Dispatcher für diesen Fall: Er verteilt die Arbeit, überwacht die Backends und gibt dem Modell eigene Werkzeuge mit."
 date: "2026-11-20"
-draft: true
+draft: false
 repoUrl: "https://codeberg.org/Gemini-Foundation/microllm"
 tags:
   - Forschung
@@ -14,6 +14,8 @@ tags:
 ---
 
 Die Gemini Foundation stellt **microllm** vor: einen LLM-Dispatcher und halbagentischen Enabler. microllm ist ein einzelnes Programm, das zwischen Anwendungen und selbst betriebenen Sprachmodellen steht.
+
+Das Grundprinzip zeigt das Heft: [microllm in acht Seiten](/hefte/microllm.html).
 
 ## Die Frage
 

@@ -15,6 +15,8 @@ tags:
 
 Die Gemini Foundation stellt **microBoa** vor: einen Privacy Provider für dezentrale Dienstgeheimnisse. microBoa ist ein Forschungsvorhaben zur minimalistischen Zero-Trust-Machine-Platform.
 
+Zweck, Konzept und Protokoll zeigt das Heft: [microBoa in acht Seiten](/hefte/microboa.html).
+
 ## Einordnung: Vertrauensbereiche im Digitalen
 
 Die Forschung der Stiftung zu digitalen Zwillingen geht davon aus, dass sich reale Prozesse digital abbilden lassen. Das gelingt heute fast überall – nur beim Vertrauen ist Schluss. Weil die Konzepte fehlen, wird an dieser Stelle entweder im Klartext gearbeitet, oder alles wird zentralisiert.

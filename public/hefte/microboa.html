@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>microBoa – Privacy Provider für dezentrale Dienstgeheimnisse</title>
+<link href="/css/hefte-fonts.css" rel="stylesheet">
+<style>
+  :root {
+    --ink: #001F3F;
+    --text: #1A1A1A;
+    --paper: #FFFFFF;
+    --boa: #001F3F;
+    --call: #D4AF37;
+    --desk: #E7EAEE;
+    --rule: #C3C9D2;
+    --quiet: #4A5568;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--desk); }
+  body {
+    margin: 0;
+    color: var(--text);
+    font-family: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    font-size: 10.6pt;
+    line-height: 1.38;
+  }
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    max-width: 100%;
+    margin: 8mm auto;
+    padding: 14mm 18mm 11mm;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  h1 { margin: 0; font-size: 29pt; font-weight: 700; line-height: 1.16; color: var(--ink); }
+  h1 span { display: block; white-space: nowrap; }
+  h1 .turn { color: var(--call); }
+  h2, h3 { color: var(--ink); }
+  svg text { font-family: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif; }
+  h2 { margin: 0 0 2.5mm; font-size: 17pt; font-weight: 700; line-height: 1.15; }
+  h3 { margin: 0 0 1mm; font-size: 12pt; font-weight: 700; line-height: 1.2; }
+  p { margin: 0; }
+  p + p { margin-top: 2.5mm; }
+  .text { max-width: 74ch; }
+  .block { margin-top: 6.5mm; }
+  .pagemark {
+    margin-top: auto;
+    padding-top: 3mm;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 8mm;
+    font-size: 9pt;
+    color: var(--quiet);
+  }
+  .pagemark span:last-child { flex: none; }
+
+  .cover { justify-content: space-between; }
+  .cover .name { font-size: 18pt; font-weight: 700; color: var(--ink); }
+  .cover .claim { margin-top: 7mm; font-size: 15pt; font-weight: 500; color: var(--quiet); }
+  .cover svg { display: block; width: 100%; height: auto; margin-top: 16mm; font-family: inherit; }
+  .cover .origin { font-size: 11pt; color: var(--quiet); }
+
+  .ways { margin-top: 5mm; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7mm; }
+  .way { padding-top: 2mm; border-top: 3px solid var(--rule); }
+  .way.chosen { border-top-color: var(--call); }
+  .conditions { margin: 4mm 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 7mm; }
+  .conditions li { padding-left: 3mm; border-left: 3px solid var(--call); }
+  .conditions strong { display: block; font-size: 12pt; color: var(--ink); }
+  ul.plain { margin: 3mm 0 0; padding-left: 1.15em; }
+  ul.plain li { margin-bottom: 1.5mm; }
+  ul.plain.tight { margin-top: 0; }
+  .limits { margin-top: 6.5mm; padding: 3mm 5mm; border: 1px solid var(--rule); }
+  .limits ul.plain { margin-top: 1mm; }
+
+  .roomy { font-size: 12.6pt; line-height: 1.42; }
+  .roomy h2 { font-size: 21pt; margin-bottom: 4mm; }
+  .roomy h3, .roomy .conditions strong { font-size: 14pt; }
+  .roomy .block { margin-top: 11mm; }
+  .roomy .ways, .roomy .conditions { margin-top: 7mm; }
+  .roomy .limits { margin-top: 11mm; padding: 5mm 6mm; }
+  .airy { font-size: 11.6pt; line-height: 1.4; }
+  .airy h2 { font-size: 20pt; margin-bottom: 3.5mm; }
+  .airy figure { margin-top: 7mm; }
+  .airy .block { margin-top: 8mm; }
+
+  figure { margin: 4mm 0 0; }
+  figure svg { display: block; width: 100%; height: auto; font-family: inherit; }
+  .legend {
+    list-style: none;
+    margin: 2mm 0 0;
+    padding: 3mm 0 0;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2mm 7mm;
+    font-size: 9.8pt;
+  }
+  .legend li { display: flex; align-items: center; gap: 2mm; }
+  .swatch { width: 5mm; height: 3.4mm; border: 1px solid; flex: none; }
+  .scale { margin-top: 2mm; font-size: 9.2pt; color: var(--quiet); }
+  .steps { margin: 3.5mm 0 0; padding: 0; list-style-position: inside; display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 7mm; }
+  .steps li::marker, .checks li::marker { font-weight: 700; color: var(--ink); }
+  .pair { margin-top: 3mm; display: grid; grid-template-columns: 1.15fr 1fr; gap: 10mm; }
+  .checks { margin: 0; padding-left: 1.3em; }
+  .checks.block { margin-top: 6.5mm; max-width: 78ch; }
+  .checks li { margin-bottom: 0.8mm; }
+  h3.follow { margin-top: 2.2mm; }
+
+  .special { font-size: 9.6pt; line-height: 1.33; }
+  .special h2 { margin-bottom: 1.5mm; }
+  .special h3 { font-size: 11.5pt; }
+  .special figure { margin-top: 1.5mm; }
+  .special .block { margin-top: 3.2mm; }
+  .special .caption { margin-top: 1.5mm; }
+  .special .legend { font-size: 9pt; gap: 1.5mm 5mm; border-top: 0; padding-top: 0; margin-top: 1.5mm; }
+  .cases { margin-top: 8mm; display: grid; grid-template-columns: 1fr 1fr; gap: 8mm; }
+  .cases > div { padding-top: 1.5mm; border-top: 3px solid var(--rule); }
+
+  @media (max-width: 760px) {
+    .sheet { margin: 0 0 4mm; padding: 18px; height: auto; min-height: 0; }
+    h1 { font-size: 20pt; }
+    h1 span { white-space: normal; }
+    h2 { font-size: 16pt; }
+    .ways, .conditions, .steps, .pair, .cases { grid-template-columns: 1fr; gap: 5mm; }
+    figure { overflow-x: auto; }
+    figure svg { min-width: 640px; }
+    .cover svg { margin-top: 8mm; }
+    .pagemark { margin-top: 8mm; flex-direction: column; gap: 1mm; }
+  }
+  @page { size: A4; margin: 0; }
+  @media print {
+    html { background: none; }
+    .sheet { margin: 0; break-after: page; }
+    .sheet:last-child { break-after: auto; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Seite 1: Titel -->
+<section class="sheet cover">
+  <p class="name">microBoa</p>
+  <div>
+    <h1><span>Der Tresor bleibt beim Dienst.</span><span>Der Schlüssel bleibt beim Dienst.</span><span class="turn">Boa aktiviert den Schlüssel.</span></h1>
+    <p class="claim">Privacy Provider für dezentrale Dienstgeheimnisse</p>
+    <svg viewBox="0 0 678.3 96" role="img" aria-label="Zwei Balken im selben Maßstab: eine Anfrage mit 255 Byte, eine Antwort mit 118 Byte">
+      <rect x="0" y="6" width="678.3" height="26" fill="#4F6B8A"/>
+      <text x="0" y="50" font-size="13" fill="#001F3F">eine Anfrage, 255 Byte</text>
+      <rect x="0" y="62" width="313.9" height="26" fill="#D4AF37"/>
+      <text x="325.9" y="80" font-size="13" fill="#001F3F">eine Antwort, 118 Byte</text>
+    </svg>
+  </div>
+  <p class="origin">Ein Forschungsvorhaben der Gemini Foundation, Leipzig,<br>zur minimalistischen Zero-Trust-Machine-Platform.</p>
+</section>
+
+<!-- Seite 2: Die Frage -->
+<section class="sheet roomy">
+  <h2>Wohin mit den Geheimnissen eines Dienstes?</h2>
+  <p class="text">Datenbank-Passwörter, Tokens, private Schlüssel: Jeder Dienst braucht sie beim Start. Fast jeder
+  reale Vorgang lässt sich heute digital abbilden – nur beim Vertrauen ist Schluss. Weil die Konzepte fehlen, gibt
+  es bisher zwei Antworten. Boa ist die dritte.</p>
+  <div class="ways">
+    <div class="way">
+      <h3>Lesbar auf der Maschine</h3>
+      <p>In der Konfiguration oder in der Umgebung. Wer die Platte, ein Backup oder ein Image bekommt, hat alles.</p>
+    </div>
+    <div class="way">
+      <h3>Zentral in einem Tresor</h3>
+      <p>Der Dienst holt seine Geheimnisse dort ab – und braucht dafür selbst ein Zugangsgeheimnis. Das liegt
+      wieder auf der Maschine.</p>
+    </div>
+    <div class="way chosen">
+      <h3>Verschlossen beim Dienst</h3>
+      <p>Die Geheimnisse bleiben, wo sie gebraucht werden, aber verschlossen. Auch der Schlüssel bleibt dort. Boa
+      aktiviert ihn.</p>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3>Was beide bisherigen Antworten gemeinsam haben</h3>
+    <p class="text">Am Ende liegt doch wieder etwas Lesbares auf der Maschine: das Geheimnis selbst oder der Zugang
+    zum zentralen Tresor. Und der zentrale Tresor sammelt, was eigentlich verteilt bleiben sollte – wer ihn öffnet,
+    hat die Geheimnisse aller Dienste auf einmal.</p>
+  </div>
+  <p class="pagemark"><span>microBoa: die Frage</span><span>2 von 8</span></p>
+</section>
+
+<!-- Seite 3: Schlüsselmeister -->
+<section class="sheet roomy">
+    <h2>Wie die reale Welt es löst: der Schlüsselmeister</h2>
+    <div class="text">
+      <p>In der realen Welt löst man diese Aufgabe mit einem Vertrag mit einer Art Schlüsselmeister. Bei Banken ist
+      das üblich: Die Bank verwahrt den Schlüssel zum Safe für den Kunden, öffnen darf nur der Kunde. Der Safe
+      selbst könnte sonstwo stehen, denn die Verwahrung des Schlüssels und der bauliche Schutz des Tresors sind
+      voneinander unabhängig.</p>
+      <p>Boa ist das digitale Abbild dieser Trennung: ein dezentraler Ansatz mit asymmetrischer Verschlüsselung
+      und einem Vertrauensanker.</p>
+    </div>
+    <ul class="conditions">
+      <li><strong>der Tresor</strong>Die verschlossene Konfiguration eines Dienstes. Sie liegt beim Dienst, auf
+      dessen eigener Maschine.</li>
+      <li><strong>der bauliche Schutz</strong>Die asymmetrische Verschlüsselung. Sie braucht kein Gebäude und
+      keinen bewachten Ort.</li>
+      <li><strong>der Schlüsselmeister</strong>Boa. Er ist nicht einmal Verwahrer: Er gewährt einem Dienst den
+      Zugang zu dessen eigenem Schlüssel.</li>
+    </ul>
+
+  <div class="block">
+    <h2>Vertrauensbereiche im Digitalen</h2>
+    <div class="text">
+      <p>In der physischen Welt sind Vertrauensbereiche sichtbar: ein Raum, ein Schloss, eine Person mit Schlüssel.
+      Im Digitalen fehlen diese Grenzen. Ein Geheimnis, das lesbar auf einer Maschine liegt, gehört jedem, der eine
+      Kopie dieser Maschine besitzt.</p>
+      <p>Boa zieht einen Vertrauensbereich mit kryptographischen Mitteln. Er ist nicht durch Mauern begrenzt,
+      sondern durch überprüfbare Bedingungen. Außerhalb dieses Bereichs ist dieselbe Maschine, Bit für Bit kopiert,
+      wertlos.</p>
+    </div>
+  </div>
+  <p class="pagemark"><span>microBoa: der Schlüsselmeister</span><span>3 von 8</span></p>
+</section>
+
+<!-- Seite 4: Konzept -->
+<section class="sheet roomy">
+  <h2>Das Konzept</h2>
+  <div class="text">
+    <p>Jeder Dienst hat seinen eigenen Tresor: seine Konfiguration, verschlossen mit seinem eigenen Schlüssel, auf
+    seiner eigenen Maschine. Auch der Schlüssel liegt dort, aber verschlüsselt in einem Schlüsselpaket. Ein
+    verschlüsselter Schlüssel ist inaktiv: Er lässt sich nicht nutzen.</p>
+    <p>Boa hält weder einen Tresor noch einen Schlüssel der Dienste. Es aktiviert den Schlüssel eines Dienstes:
+    Es öffnet das Schlüsselpaket und macht ihn damit nutzbar – und nur, wenn drei Dinge stimmen.</p>
+  </div>
+  <ul class="conditions">
+    <li><strong>der Ort</strong>Die Anfrage kommt aus dem Netz, das im Schlüsselpaket steht.</li>
+    <li><strong>die Zeit</strong>Das Schlüsselpaket ist noch gültig. Was nicht erneuert wird, verfällt – auch in
+    jedem alten Backup.</li>
+    <li><strong>die Erlaubnis</strong>Weder der Dienst noch sein Paket steht auf der Sperrliste.</li>
+  </ul>
+
+  <div class="block">
+    <h2>Was daraus folgt</h2>
+    <ul class="plain text">
+      <li>Eine Platte, ein Backup, ein Image oder ein Snapshot enthält außerhalb des eigenen Netzes nichts Lesbares.</li>
+      <li>Ein Dienst lässt sich an einer Stelle sperren. Beim nächsten Start bleibt sein Tresor zu.</li>
+      <li>Wer Boas eigenen Schlüsselspeicher erbeutet, hat damit noch kein Geheimnis eines Dienstes: Ihm fehlen
+      die Schlüsselpakete.</li>
+      <li>Laufende Dienste arbeiten weiter, wenn Boa ausfällt. Nur ein Neustart braucht Boa.</li>
+    </ul>
+  </div>
+
+  <div class="limits">
+    <h3>Die Grenzen</h3>
+    <ul class="plain">
+      <li>Boa sieht jeden Dienstschlüssel, wenn es ihn aktiviert. Wer Boas Rechner beherrscht, hat alles.</li>
+      <li>Wer ein Schlüsselpaket hat und im Netzweg des Dienstes sitzt, kommt an dessen Schlüssel. Das Netz muss
+      gefälschte Absender verhindern.</li>
+      <li>Boa ist für interne Netze gedacht, nicht für das offene Internet.</li>
+    </ul>
+  </div>
+  <p class="pagemark"><span>microBoa: das Konzept</span><span>4 von 8</span></p>
+</section>
+
+<!-- Seite 5: Standardprotokoll -->
+<section class="sheet">
+  <h2>Das Standardprotokoll: anfragen, eigenen Schlüssel bekommen, fertig</h2>
+  <figure>
+    <svg viewBox="0 0 706 308" role="img">
+<title>Anfrage und Antwort im selben Maßstab</title>
+<desc>Die Anfrage hat 255 Byte: 4 Byte Schlüsselkennung im Klartext, dann ein Umschlag für Boa mit dem öffentlichen Einmalschlüssel und dem Schlüsselpaket von 170 Byte. Im Schlüsselpaket liegen der private Dienstschlüssel, Dienstcode, Absendernetz und Hostname. Die Antwort hat 118 Byte: ein Umschlag für den Einmalschlüssel mit dem privaten Dienstschlüssel und dem neuesten Schlüssel von Boa.</desc>
+<line x1="14.0" y1="34" x2="692.3" y2="34" stroke="#001F3F" stroke-width="1.4"/><path d="M683.3,29 L692.3,34 L683.3,39" fill="none" stroke="#001F3F" stroke-width="1.4"/><text x="14.0" y="24" font-size="15" font-weight="600" fill="#001F3F">Anfrage, 255 Byte: der Dienst an Boa</text>
+<rect x="14.0" y="50" width="10.64" height="40" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1"/>
+<rect x="24.64" y="50" width="85.12" height="40" fill="#4F6B8A" stroke="#4F6B8A" stroke-width="1"/>
+<text x="67.20" y="67.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">enc</text>
+<text x="67.20" y="80.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">32</text>
+<rect x="109.76" y="50" width="2.66" height="40" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<rect x="112.42" y="50" width="85.12" height="40" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<text x="154.98" y="67.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Einmalschlüssel</text>
+<text x="154.98" y="80.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">öffentlich, 32</text>
+<rect x="197.54" y="50" width="452.2" height="40" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<text x="423.64" y="67.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Schlüsselpaket, 170</text>
+<text x="423.64" y="80.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">liegt so beim Dienst auf der Platte</text>
+<rect x="649.74" y="50" width="42.56" height="40" fill="#4F6B8A" stroke="#4F6B8A" stroke-width="1"/>
+<text x="671.02" y="67.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">Tag</text>
+<text x="671.02" y="80.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">16</text>
+<line x1="197.54" y1="90" x2="197.54" y2="106" stroke="#4F6B8A" stroke-width="1" stroke-dasharray="3 3"/>
+<line x1="649.74" y1="90" x2="649.74" y2="106" stroke="#4F6B8A" stroke-width="1" stroke-dasharray="3 3"/>
+<rect x="197.54" y="106" width="85.12" height="40" fill="#4F6B8A" stroke="#4F6B8A" stroke-width="1"/>
+<text x="240.10" y="123.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">enc</text>
+<text x="240.10" y="136.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">32</text>
+<rect x="282.66" y="106" width="2.66" height="40" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<rect x="285.32" y="106" width="85.12" height="40" fill="#001F3F" stroke="#001F3F" stroke-width="1"/>
+<text x="327.88" y="123.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">Dienstschlüssel</text>
+<text x="327.88" y="136.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">privat, 32</text>
+<rect x="370.44" y="106" width="21.28" height="40" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<line x1="381.08" y1="146" x2="381.08" y2="153" stroke="#001F3F" stroke-width="0.8"/>
+<text x="381.08" y="163" text-anchor="middle" font-size="10.5" fill="#001F3F">Dienstcode 8</text>
+<rect x="391.72" y="106" width="45.22" height="40" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<line x1="414.33" y1="146" x2="414.33" y2="168" stroke="#001F3F" stroke-width="0.8"/>
+<text x="414.33" y="178" text-anchor="middle" font-size="10.5" fill="#001F3F">Absendernetz 17</text>
+<rect x="436.94" y="106" width="170.24" height="40" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<text x="522.06" y="123.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Hostname</text>
+<text x="522.06" y="136.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">64</text>
+<rect x="607.18" y="106" width="42.56" height="40" fill="#4F6B8A" stroke="#4F6B8A" stroke-width="1"/>
+<text x="628.46" y="123.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">Tag</text>
+<text x="628.46" y="136.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">16</text>
+<path d="M19.32,90 V126 H27.32" fill="none" stroke="#001F3F" stroke-width="0.8"/>
+<text x="31.32" y="123" font-size="10.5" fill="#001F3F">Schlüsselkennung 4,</text>
+<text x="31.32" y="136" font-size="10.5" fill="#001F3F">im Klartext</text>
+<line x1="14.0" y1="216" x2="327.88" y2="216" stroke="#001F3F" stroke-width="1.4"/><path d="M23.0,211 L14.0,216 L23.0,221" fill="none" stroke="#001F3F" stroke-width="1.4"/><text x="14.0" y="206" font-size="15" font-weight="600" fill="#001F3F">Antwort, 118 Byte: Boa an den Dienst</text>
+<rect x="14.0" y="232" width="85.12" height="40" fill="#D4AF37" stroke="#D4AF37" stroke-width="1"/>
+<text x="56.56" y="249.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">enc</text>
+<text x="56.56" y="262.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">32</text>
+<rect x="99.12" y="232" width="2.66" height="40" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<rect x="101.78" y="232" width="2.66" height="40" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<line x1="103.11" y1="272" x2="103.11" y2="294" stroke="#001F3F" stroke-width="0.8"/>
+<text x="103.11" y="304" text-anchor="middle" font-size="10.5" fill="#001F3F">Kennzeichen 0: Schlüsselpaket ist aktuell</text>
+<rect x="104.44" y="232" width="85.12" height="40" fill="#001F3F" stroke="#001F3F" stroke-width="1"/>
+<text x="147.00" y="249.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">Dienstschlüssel</text>
+<text x="147.00" y="262.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">privat, 32</text>
+<rect x="189.56" y="232" width="95.76" height="40" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<text x="237.44" y="249.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">neuester Schlüssel</text>
+<text x="237.44" y="262.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">von Boa, 36</text>
+<rect x="285.32" y="232" width="42.56" height="40" fill="#D4AF37" stroke="#D4AF37" stroke-width="1"/>
+<text x="306.60" y="249.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Tag</text>
+<text x="306.60" y="262.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">16</text>
+<text x="353.88" y="246" font-size="12.5" fill="#001F3F">Ein Paket hinein, eines hinaus. Mehr nicht.</text>
+<text x="353.88" y="262" font-size="12.5" fill="#001F3F">Auf alles, was eine Prüfung nicht besteht, schweigt Boa.</text>
+<text x="353.88" y="278" font-size="12.5" fill="#001F3F">Mit gefälschtem Absender lässt sich nichts spiegeln.</text>
+</svg>
+    <ul class="legend"><li><span class="swatch" style="background:#E5E7EB;border-color:#9CA3AF"></span>lesbar für jeden auf der Leitung</li><li><span class="swatch" style="background:#DCE4EC;border-color:#4F6B8A"></span>lesbar nur für Boa</li><li><span class="swatch" style="background:#F6ECC9;border-color:#D4AF37"></span>lesbar nur für diesen einen Aufruf des Dienstes</li><li><span class="swatch" style="background:#001F3F;border-color:#001F3F"></span>das Geheimnis, um das es geht</li></ul>
+    <p class="scale">Beide Pakete im selben Maßstab, Zahlen in Byte; schmale Felder ohne Beschriftung sind je ein Byte
+    Formatversion. Die Umschläge sind HPKE nach RFC 9180 (X25519, HKDF-SHA256, AES-256-GCM); „enc“ und „Tag“ gehören
+    zum Umschlag.</p>
+  </figure>
+  <ol class="steps">
+    <li>Der Dienst schickt sein Schlüsselpaket. Darin liegt sein eigener privater Schlüssel, verschlossen für Boa.</li>
+    <li>Boa prüft die Anfrage, öffnet das Paket und schickt den Schlüssel zurück, verschlossen für diesen einen
+    Aufruf.</li>
+    <li>Der Dienst öffnet damit seinen Tresor im Arbeitsspeicher und verwirft den Schlüssel.</li>
+  </ol>
+  <div class="pair">
+    <div>
+      <h3>Was Boa prüft, der Reihe nach</h3>
+      <ol class="checks">
+        <li>Der Absender liegt in einem zugelassenen Netz.</li>
+        <li>Er hat seine Menge an Anfragen nicht überschritten.</li>
+        <li>Das Paket hat genau 255 Byte.</li>
+        <li>Die Schlüsselkennung ist bekannt.</li>
+        <li>Umschlag und Schlüsselpaket lassen sich öffnen.</li>
+        <li>Der Dienstcode gehört zu diesem Schlüssel.</li>
+        <li>Der Absender liegt im Netz, das im Paket steht.</li>
+        <li>Dienst und Paket sind nicht gesperrt.</li>
+      </ol>
+      <p>Scheitert eine Prüfung, kommt keine Antwort.</p>
+    </div>
+    <div>
+      <h3>Nichts zu spiegeln</h3>
+      <ul class="plain tight">
+        <li>Boa antwortet nur auf eine Anfrage, die alle Prüfungen besteht. Ein gefälschter Absender bekommt
+        nichts zugeschickt: kein Spiegeln ins Netz, kein Spiegeln auf einen Dienst.</li>
+        <li>Dienste lauschen nicht. Sie warten nur kurz auf die Antwort ihrer eigenen Anfrage; ein fremdes Paket
+        trifft keinen offenen Port.</li>
+      </ul>
+      <h3 class="follow">Was das Protokoll nicht braucht</h3>
+      <ul class="plain tight">
+        <li>Keinen Handshake, keine Sitzung, keinen Zustand: UDP, Port 7777, feste Längen.</li>
+        <li>Kein TLS und keine Zertifikate.</li>
+        <li>Keinen Abgleich zwischen Instanzen. Mehrere können hinter einer gemeinsamen Adresse stehen.</li>
+      </ul>
+    </div>
+  </div>
+  <p class="pagemark"><span>microBoa: das Standardprotokoll</span><span>5 von 8</span></p>
+</section>
+
+<!-- Seite 6: Sondervorgang Einrichtung -->
+<section class="sheet airy">
+  <h2>Sondervorgang: die Einrichtung</h2>
+  <p class="text">Im Alltag gibt es nur Anfrage und Antwort. Einmal je Dienst kommt die Einrichtung dazu: Der Dienst
+  holt sich Boas öffentlichen Schlüssel. Auch dieser Vorgang besteht aus Paketen derselben beiden Längen.</p>
+  <figure>
+    <svg viewBox="0 0 706 420" role="img">
+<title>Einrichtung: der Schlüssel von Boa in zwei Schritten</title>
+<desc>Schritt 1: Eine unverschlossene Anfrage mit Kennung 0000 und öffentlichem Einmalschlüssel; die Antwort nennt den öffentlichen Schlüssel der Domain. Schritt 2: Eine Anfrage mit Kennung 0001, verschlossen für den Schlüssel der Domain, mit Einmalschlüssel und Dienstcode; die Antwort nennt den Schlüssel von Boa, der für diesen Dienst gilt. Alle Pakete haben die Längen von Anfrage und Antwort.</desc>
+<line x1="14.0" y1="30" x2="692.3" y2="30" stroke="#001F3F" stroke-width="1.4"/><path d="M683.3,25 L692.3,30 L683.3,35" fill="none" stroke="#001F3F" stroke-width="1.4"/><text x="14.0" y="20" font-size="15" font-weight="600" fill="#001F3F">Schritt 1, Anfrage: Welchen Schlüssel hat diese Domain? 255 Byte, nichts ist verschlossen</text>
+<rect x="14.0" y="44" width="10.64" height="38" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1"/>
+<rect x="24.64" y="44" width="85.12" height="38" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1"/>
+<text x="67.20" y="60.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Einmalschlüssel</text>
+<text x="67.20" y="73.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">öffentlich, 32</text>
+<rect x="109.76" y="44" width="582.54" height="38" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1"/>
+<text x="401.03" y="67.00" text-anchor="middle" font-size="11" font-weight="600" fill="#4A5568">Füllbytes, 219</text>
+<path d="M19.32,82 V98 H27.32" fill="none" stroke="#001F3F" stroke-width="0.8"/>
+<text x="31.32" y="95" font-size="10.5" fill="#001F3F">Kennung 0000</text>
+<line x1="14.0" y1="140" x2="327.88" y2="140" stroke="#001F3F" stroke-width="1.4"/><path d="M23.0,135 L14.0,140 L23.0,145" fill="none" stroke="#001F3F" stroke-width="1.4"/><text x="14.0" y="130" font-size="15" font-weight="600" fill="#001F3F">Schritt 1, Antwort: der Schlüssel der Domain, 118 Byte</text>
+<rect x="14.0" y="154" width="85.12" height="38" fill="#D4AF37" stroke="#D4AF37" stroke-width="1"/>
+<text x="56.56" y="170.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">enc</text>
+<text x="56.56" y="183.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">32</text>
+<rect x="99.12" y="154" width="2.66" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<rect x="101.78" y="154" width="2.66" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<rect x="104.44" y="154" width="95.76" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<text x="152.32" y="170.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Füllbytes</text>
+<text x="152.32" y="183.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">36</text>
+<rect x="200.2" y="154" width="85.12" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<text x="242.76" y="170.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Domain-Schlüssel</text>
+<text x="242.76" y="183.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">öffentlich, 32</text>
+<rect x="285.32" y="154" width="42.56" height="38" fill="#D4AF37" stroke="#D4AF37" stroke-width="1"/>
+<text x="306.60" y="170.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Tag</text>
+<text x="306.60" y="183.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">16</text>
+<text x="353.88" y="163" font-size="12" fill="#001F3F">Diese Antwort beweist nicht, wer sie geschickt hat.</text>
+<text x="353.88" y="179" font-size="12" fill="#001F3F">Der Dienst vergleicht deshalb den Kurzcode des Schlüssels</text>
+<text x="353.88" y="195" font-size="12" fill="#001F3F">mit dem, den der Betreiber genannt hat.</text>
+<line x1="14.0" y1="246" x2="692.3" y2="246" stroke="#001F3F" stroke-width="1.4"/><path d="M683.3,241 L692.3,246 L683.3,251" fill="none" stroke="#001F3F" stroke-width="1.4"/><text x="14.0" y="236" font-size="15" font-weight="600" fill="#001F3F">Schritt 2, Anfrage: Welcher Schlüssel gilt für meinen Dienstcode? 255 Byte</text>
+<rect x="14.0" y="260" width="10.64" height="38" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="1"/>
+<rect x="24.64" y="260" width="85.12" height="38" fill="#4F6B8A" stroke="#4F6B8A" stroke-width="1"/>
+<text x="67.20" y="276.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">enc</text>
+<text x="67.20" y="289.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">32</text>
+<rect x="109.76" y="260" width="2.66" height="38" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<rect x="112.42" y="260" width="85.12" height="38" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<text x="154.98" y="276.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Einmalschlüssel</text>
+<text x="154.98" y="289.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">öffentlich, 32</text>
+<rect x="197.54" y="260" width="21.28" height="38" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<line x1="208.18" y1="298" x2="208.18" y2="305" stroke="#001F3F" stroke-width="0.8"/>
+<text x="208.18" y="315" text-anchor="middle" font-size="10.5" fill="#001F3F">Dienstcode 8</text>
+<rect x="218.82" y="260" width="430.92" height="38" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<text x="434.28" y="283.00" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Füllbytes, 162</text>
+<rect x="649.74" y="260" width="42.56" height="38" fill="#4F6B8A" stroke="#4F6B8A" stroke-width="1"/>
+<text x="671.02" y="276.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">Tag</text>
+<text x="671.02" y="289.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">16</text>
+<path d="M19.32,298 V314 H27.32" fill="none" stroke="#001F3F" stroke-width="0.8"/>
+<text x="31.32" y="311" font-size="10.5" fill="#001F3F">Kennung 0001</text>
+<line x1="14.0" y1="356" x2="327.88" y2="356" stroke="#001F3F" stroke-width="1.4"/><path d="M23.0,351 L14.0,356 L23.0,361" fill="none" stroke="#001F3F" stroke-width="1.4"/><text x="14.0" y="346" font-size="15" font-weight="600" fill="#001F3F">Schritt 2, Antwort: Boas Schlüssel für diesen Dienst, 118 Byte</text>
+<rect x="14.0" y="370" width="85.12" height="38" fill="#D4AF37" stroke="#D4AF37" stroke-width="1"/>
+<text x="56.56" y="386.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">enc</text>
+<text x="56.56" y="399.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">32</text>
+<rect x="99.12" y="370" width="2.66" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<rect x="101.78" y="370" width="2.66" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<rect x="104.44" y="370" width="85.12" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<text x="147.00" y="386.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Füllbytes</text>
+<text x="147.00" y="399.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">32</text>
+<rect x="189.56" y="370" width="95.76" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<text x="237.44" y="386.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Schlüssel von Boa</text>
+<text x="237.44" y="399.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">Kennung 4 + 32</text>
+<rect x="285.32" y="370" width="42.56" height="38" fill="#D4AF37" stroke="#D4AF37" stroke-width="1"/>
+<text x="306.60" y="386.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Tag</text>
+<text x="306.60" y="399.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">16</text>
+<text x="353.88" y="379" font-size="12" fill="#001F3F">Den Einmalschlüssel konnte nur lesen, wer den Schlüssel</text>
+<text x="353.88" y="395" font-size="12" fill="#001F3F">der Domain besitzt. Diese Antwort ist damit so echt</text>
+<text x="353.88" y="411" font-size="12" fill="#001F3F">wie der geprüfte Kurzcode.</text>
+</svg>
+    <ul class="legend"><li><span class="swatch" style="background:#E5E7EB;border-color:#9CA3AF"></span>lesbar für jeden</li><li><span class="swatch" style="background:#FFFFFF;border-color:#9CA3AF"></span>Füllbytes, alle null</li><li><span class="swatch" style="background:#DCE4EC;border-color:#4F6B8A"></span>lesbar nur für Boa</li><li><span class="swatch" style="background:#EFF3F7;border-color:#A9B8C8"></span>verschlossen für einen älteren Schlüssel von Boa</li><li><span class="swatch" style="background:#F6ECC9;border-color:#D4AF37"></span>lesbar nur für diesen einen Aufruf</li><li><span class="swatch" style="background:#001F3F;border-color:#001F3F"></span>das Geheimnis</li></ul>
+  </figure>
+  <ol class="checks block">
+    <li>Der Dienst erzeugt sein eigenes Schlüsselpaar.</li>
+    <li>Schritt 1: Er fragt nach dem Schlüssel der Domain und vergleicht dessen Kurzcode mit dem, den der Betreiber
+    genannt hat.</li>
+    <li>Schritt 2: Er fragt, für den Schlüssel der Domain verschlossen, nach dem Schlüssel von Boa, der für seinen
+    Dienstcode gilt. Der Dienstcode steht dabei nie im Klartext auf der Leitung.</li>
+    <li>Er bildet sein Schlüsselpaket und fragt einmal wie im Regelfall an. Öffnet Boa das Paket nicht, wird nichts
+    angelegt.</li>
+    <li>Seinen Tresor verschließt er danach selbst, ohne Boa.</li>
+  </ol>
+  <p class="block text">Der Betreiber kann den Schlüssel von Boa auch gleich mitgeben; dann entfallen die Schritte 1
+  und 2. Ein Dienst kann sich so beim ersten Start selbst einrichten: starten, einrichten, läuft.</p>
+  <p class="pagemark"><span>microBoa: die Einrichtung</span><span>6 von 8</span></p>
+</section>
+
+<!-- Seite 7: Sondervorgang Schlüsselwechsel -->
+<section class="sheet airy">
+  <h2>Sondervorgang: der Schlüsselwechsel</h2>
+  <p class="text">Boa wechselt seine Schlüssel nach der Uhr; mehrere Instanzen rechnen sie gleich aus, ohne sich
+  abzustimmen. Für den Dienst ändert sich an Anfrage und Antwort nichts. Nur ein Kennzeichen in der Antwort sagt
+  ihm, dass sein Schlüsselpaket für einen älteren Schlüssel verschlossen ist.</p>
+  <figure>
+    <svg viewBox="0 0 706 242" role="img">
+<title>Schlüsselwechsel: die Antwort und das Schlüsselpaket davor und danach</title>
+<desc>Die Antwort trägt das Kennzeichen, neu zu verschließen, und den neuesten Schlüssel von Boa. Der Dienst verschließt sein Schlüsselpaket von 170 Byte für diesen Schlüssel neu. Der Inhalt bleibt derselbe: Dienstschlüssel, Dienstcode, Absendernetz und Hostname.</desc>
+<line x1="14.0" y1="30" x2="327.88" y2="30" stroke="#001F3F" stroke-width="1.4"/><path d="M23.0,25 L14.0,30 L23.0,35" fill="none" stroke="#001F3F" stroke-width="1.4"/><text x="14.0" y="20" font-size="15" font-weight="600" fill="#001F3F">Antwort auf eine Anfrage mit einem älteren Schlüssel, 118 Byte</text>
+<rect x="14.0" y="44" width="85.12" height="38" fill="#D4AF37" stroke="#D4AF37" stroke-width="1"/>
+<text x="56.56" y="60.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">enc</text>
+<text x="56.56" y="73.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">32</text>
+<rect x="99.12" y="44" width="2.66" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<rect x="101.78" y="44" width="2.66" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<line x1="103.11" y1="82" x2="103.11" y2="89" stroke="#001F3F" stroke-width="0.8"/>
+<text x="103.11" y="99" text-anchor="middle" font-size="10.5" fill="#001F3F">Kennzeichen 1: bitte neu verschließen</text>
+<rect x="104.44" y="44" width="85.12" height="38" fill="#001F3F" stroke="#001F3F" stroke-width="1"/>
+<text x="147.00" y="60.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">Dienstschlüssel</text>
+<text x="147.00" y="73.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">privat, 32</text>
+<rect x="189.56" y="44" width="95.76" height="38" fill="#F6ECC9" stroke="#D4AF37" stroke-width="1"/>
+<text x="237.44" y="60.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">neuester Schlüssel</text>
+<text x="237.44" y="73.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">von Boa, 36</text>
+<rect x="285.32" y="44" width="42.56" height="38" fill="#D4AF37" stroke="#D4AF37" stroke-width="1"/>
+<text x="306.60" y="60.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Tag</text>
+<text x="306.60" y="73.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">16</text>
+<text x="353.88" y="53" font-size="12" fill="#001F3F">Es ist dieselbe Antwort wie im Regelfall.</text>
+<text x="353.88" y="69" font-size="12" fill="#001F3F">Nur das Kennzeichen sagt: Dein Schlüsselpaket</text>
+<text x="353.88" y="85" font-size="12" fill="#001F3F">ist für einen älteren Schlüssel verschlossen.</text>
+<rect x="14.0" y="136" width="85.12" height="38" fill="#A9B8C8" stroke="#A9B8C8" stroke-width="1"/>
+<text x="56.56" y="152.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">enc</text>
+<text x="56.56" y="165.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">32</text>
+<rect x="99.12" y="136" width="2.66" height="38" fill="#EFF3F7" stroke="#A9B8C8" stroke-width="1"/>
+<rect x="101.78" y="136" width="85.12" height="38" fill="#001F3F" stroke="#001F3F" stroke-width="1"/>
+<text x="144.34" y="152.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">Dienstschlüssel</text>
+<text x="144.34" y="165.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">privat, 32</text>
+<rect x="186.9" y="136" width="21.28" height="38" fill="#EFF3F7" stroke="#A9B8C8" stroke-width="1"/>
+<rect x="208.18" y="136" width="45.22" height="38" fill="#EFF3F7" stroke="#A9B8C8" stroke-width="1"/>
+<rect x="253.4" y="136" width="170.24" height="38" fill="#EFF3F7" stroke="#A9B8C8" stroke-width="1"/>
+<text x="338.52" y="152.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Hostname</text>
+<text x="338.52" y="165.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">64</text>
+<rect x="423.64" y="136" width="42.56" height="38" fill="#A9B8C8" stroke="#A9B8C8" stroke-width="1"/>
+<text x="444.92" y="152.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">Tag</text>
+<text x="444.92" y="165.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">16</text>
+<text x="484.2" y="150" font-size="12" fill="#001F3F">Schlüsselpaket vorher:</text>
+<text x="484.2" y="166" font-size="12" fill="#001F3F">verschlossen für den älteren Schlüssel</text>
+<rect x="14.0" y="194" width="85.12" height="38" fill="#4F6B8A" stroke="#4F6B8A" stroke-width="1"/>
+<text x="56.56" y="210.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">enc</text>
+<text x="56.56" y="223.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">32</text>
+<rect x="99.12" y="194" width="2.66" height="38" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<rect x="101.78" y="194" width="85.12" height="38" fill="#001F3F" stroke="#001F3F" stroke-width="1"/>
+<text x="144.34" y="210.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">Dienstschlüssel</text>
+<text x="144.34" y="223.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">privat, 32</text>
+<rect x="186.9" y="194" width="21.28" height="38" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<rect x="208.18" y="194" width="45.22" height="38" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<rect x="253.4" y="194" width="170.24" height="38" fill="#DCE4EC" stroke="#4F6B8A" stroke-width="1"/>
+<text x="338.52" y="210.50" text-anchor="middle" font-size="11" font-weight="600" fill="#001F3F">Hostname</text>
+<text x="338.52" y="223.50" text-anchor="middle" font-size="11" font-weight="400" fill="#001F3F">64</text>
+<rect x="423.64" y="194" width="42.56" height="38" fill="#4F6B8A" stroke="#4F6B8A" stroke-width="1"/>
+<text x="444.92" y="210.50" text-anchor="middle" font-size="11" font-weight="600" fill="#FFFFFF">Tag</text>
+<text x="444.92" y="223.50" text-anchor="middle" font-size="11" font-weight="400" fill="#FFFFFF">16</text>
+<text x="484.2" y="208" font-size="12" fill="#001F3F">Schlüsselpaket nachher:</text>
+<text x="484.2" y="224" font-size="12" fill="#001F3F">verschlossen für den neuesten</text>
+</svg>
+    <ul class="legend"><li><span class="swatch" style="background:#E5E7EB;border-color:#9CA3AF"></span>lesbar für jeden</li><li><span class="swatch" style="background:#FFFFFF;border-color:#9CA3AF"></span>Füllbytes, alle null</li><li><span class="swatch" style="background:#DCE4EC;border-color:#4F6B8A"></span>lesbar nur für Boa</li><li><span class="swatch" style="background:#EFF3F7;border-color:#A9B8C8"></span>verschlossen für einen älteren Schlüssel von Boa</li><li><span class="swatch" style="background:#F6ECC9;border-color:#D4AF37"></span>lesbar nur für diesen einen Aufruf</li><li><span class="swatch" style="background:#001F3F;border-color:#001F3F"></span>das Geheimnis</li></ul>
+  </figure>
+  <p class="block text">Der Dienst verschließt sein Schlüsselpaket neu, sobald eine Antwort ihn dazu auffordert.
+  Sein eigener Schlüssel und sein Tresor bleiben, wie sie sind. Ein Paket, das nie erneuert wird, verfällt.</p>
+
+  <div class="cases">
+    <div>
+      <h3>Neuansatz</h3>
+      <p>Der Betreiber kann Boas Schlüssel zu einem festen Zeitpunkt mit einem Zusatzgeheimnis neu ansetzen. Jede
+      ältere Kopie von Boas Schlüsselspeicher ist danach wertlos. Für die Dienste ist es ein gewöhnlicher
+      Schlüsselwechsel.</p>
+    </div>
+    <div>
+      <h3>Umzug und Sperre</h3>
+      <p>Zieht ein Dienst in ein anderes Netz, bildet er sein Schlüsselpaket neu und behält seinen Schlüssel. Der
+      Betreiber sperrt einen Dienst oder ein einzelnes Schlüsselpaket mit einem Eintrag bei Boa.</p>
+    </div>
+  </div>
+  <p class="pagemark"><span>microBoa: der Schlüsselwechsel</span><span>7 von 8</span></p>
+</section>
+
+<!-- Seite 8: Rückseite -->
+<section class="sheet cover back roomy">
+  <p class="name">microBoa</p>
+  <div>
+    <h2>Der Stand</h2>
+    <ul class="plain text">
+      <li>microBoa ist ein Forschungsstand, Version 0.1.0.</li>
+      <li>Es gibt den Server, ein Werkzeug für die Dienstseite und Module für Rust, Go und Python, mit denen sich
+      ein Dienst beim ersten Start selbst einrichtet.</li>
+      <li>Pakete für Debian 13 und Fedora, dazu ein Container-Image mit drei statisch gebundenen Programmen.</li>
+      <li>Eine externe Sicherheitsprüfung steht aus. Ein Paper mit Bedrohungsmodell, Sicherheitsargumentation und
+      Messwerten folgt.</li>
+    </ul>
+    <p class="block text">Dieses Heft zeigt das Grundprinzip. Die genauen Regeln, alle Formate und die Testvektoren
+    stehen in der Spezifikation (SPEC.md). Spezifikation und Quelltext stehen unter der Apache License 2.0.</p>
+  </div>
+  <p class="origin">Ein Forschungsvorhaben der Gemini Foundation, Leipzig,<br>zur minimalistischen
+  Zero-Trust-Machine-Platform.<br>gemini-stiftung.de</p>
+</section>
+
+</body>
+</html>
