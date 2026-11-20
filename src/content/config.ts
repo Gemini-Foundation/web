@@ -19,6 +19,7 @@ const blog = defineCollection({
     tags: z.array(z.string()),
     draft: z.boolean().optional(),
     paperUrl: z.string().optional(),
+    heftUrl: z.string().optional(),
     repoUrl: z.string().optional(),
   }),
 })

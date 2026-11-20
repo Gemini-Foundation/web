@@ -13,6 +13,7 @@ const { title, summary, date } = data
 const demoUrl = collection === "projects" ? data.demoUrl : null
 const repoUrl = "repoUrl" in data ? data.repoUrl : null
 const paperUrl = collection === "blog" && "paperUrl" in data ? data.paperUrl : null
+const heftUrl = collection === "blog" && "heftUrl" in data ? data.heftUrl : null
 ---
 
 <div>
@@ -45,7 +46,7 @@ const paperUrl = collection === "blog" && "paperUrl" in data ? data.paperUrl : n
   <div class="mt-1">
     {summary}
   </div>
-  {(demoUrl || repoUrl || paperUrl) &&
+  {(demoUrl || repoUrl || paperUrl || heftUrl) &&
   <div class="mt-4 flex flex-wrap gap-2">
     {paperUrl &&
       <a href={paperUrl} target="_blank" class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 hover:bg-black/5 blend">
@@ -54,6 +55,16 @@ const paperUrl = collection === "blog" && "paperUrl" in data ? data.paperUrl : n
         </svg>
         <span class="text-current group-hover:text-black blend">
           Zur Publikation
+        </span>
+      </a>
+    }
+    {heftUrl &&
+      <a href={heftUrl} target="_blank" class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 hover:bg-black/5 blend">
+        <svg class="size-4">
+          <use href="/ui.svg#book-open" class="fill-current group-hover:fill-black blend"/>
+        </svg>
+        <span class="text-current group-hover:text-black blend">
+          Zum Heft
         </span>
       </a>
     }

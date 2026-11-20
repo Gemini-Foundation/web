@@ -3,6 +3,8 @@ title: "microBoa: Der Tresor bleibt beim Dienst. Der Schlüssel bleibt beim Dien
 summary: "Reale Prozesse lassen sich digital abbilden – nur beim Vertrauen ist Schluss: Dort wird im Klartext gearbeitet oder alles zentralisiert. microBoa ist der dezentrale Ansatz dazu, mit asymmetrischer Verschlüsselung und einem Vertrauensanker: Der Tresor bleibt beim Dienst, und ein Schlüsselmeister gewährt den Zugang zum eigenen Schlüssel."
 date: "2026-11-20"
 draft: false
+heftUrl: "/hefte/microboa.html"
+repoUrl: "https://codeberg.org/Gemini-Foundation/microboa"
 tags:
   - Forschung
   - Kryptographie
