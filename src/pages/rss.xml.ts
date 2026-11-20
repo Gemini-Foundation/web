@@ -7,8 +7,9 @@ type Context = {
 }
 
 export async function GET(context: Context) {
-	const posts = await getCollection("blog")
-  const projects = await getCollection("projects")
+  // Entwürfe erscheinen nirgends, auch nicht im Feed.
+  const posts = (await getCollection("blog")).filter((post) => !post.data.draft)
+  const projects = (await getCollection("projects")).filter((project) => !project.data.draft)
 
   const items = [...posts, ...projects]
 
