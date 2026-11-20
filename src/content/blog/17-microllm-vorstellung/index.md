@@ -3,7 +3,6 @@ title: "microllm: Eine Adresse für alle Modelle. Die Modelle bleiben, wo sie re
 summary: "Wer Sprachmodelle selbst betreibt, hat schnell mehrere Maschinen, mehrere Modelle und mehrere Anwendungen. microllm ist ein schlanker LLM-Dispatcher für diesen Fall: Er verteilt die Arbeit, überwacht die Backends und gibt dem Modell eigene Werkzeuge mit."
 date: "2026-11-20"
 draft: true
-repoUrl: "https://codeberg.org/Gemini-Foundation/microllm"
 tags:
   - Forschung
   - Sprachmodelle
